@@ -28,32 +28,30 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Войти"
+            android:text="@string/login"
             android:id="@+id/LoginButton"
 
             android:layout_below="@id/LoginPasswordText"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Нет аккаунта?"
+            android:text="@string/question"
             android:id="@+id/QuestionTextView"
 
             android:layout_below="@+id/LoginButton"
-            android:layout_alignParentLeft="true"
-            />
+            android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Зарегистрироватся!"
+            android:text="@string/sign_up"
             android:id="@+id/SignUpTextView"
 
             android:layout_below="@+id/LoginButton"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_alignParentRight="true"/>
     <Button
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Войти без авторизации"
+            android:text="@string/anonymous_button"
             android:id="@+id/AnonymousButton"
 
             android:layout_alignParentBottom="true"

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UJourney</string>
+    <!--login activity-->
+    <string name="login">Войти</string>
+    <string name="question">Нет аккаунта?</string>
+    <string name="sign_up">Зарегистрироватся!</string>
+    <string name="anonymous_button">Войти без авторизации</string>
+
+
 </resources>
