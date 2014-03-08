@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="JourneyTheme" parent="@style/_JourneyTheme"/>
+
+  <style name="_JourneyTheme" parent="android:Theme.Holo.Light">
+
+    <item name="android:editTextBackground">@drawable/journeytheme_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#99ffffff</item>
+    <item name="android:textSelectHandleLeft">@drawable/journeytheme_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/journeytheme_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/journeytheme_text_select_handle_middle</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewJourneyTheme</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/journeytheme_btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/journeytheme_btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/ButtonJourneyTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonJourneyTheme</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerJourneyTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarJourneyTheme</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarJourneyTheme</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarJourneyTheme</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigJourneyTheme</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallJourneyTheme</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleJourneyTheme</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/journeytheme_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/journeytheme_activated_background_holo_light</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/journeytheme_fastscroll_thumb_holo</item>
+
+  </style>
+
+</resources>
