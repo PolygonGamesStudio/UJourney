@@ -12,7 +12,8 @@
             android:id="@+id/LogoTextView"
 
             android:src="@drawable/logo"
-            android:layout_centerHorizontal="true"/>
+            android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+            android:layout_marginTop="48dp"/>
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -21,7 +22,8 @@
             android:id="@+id/LoginNameText"
 
             android:background="@drawable/journeytheme_edit_text_holo_light"
-            android:layout_below="@id/LogoTextView"/>
+            android:layout_below="@+id/LogoTextView" android:layout_alignParentLeft="true"
+            android:layout_marginTop="48dp"/>
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -40,7 +42,6 @@
             android:layout_below="@id/LoginPasswordText"
             android:background="@drawable/journeytheme_btn_default_holo_light"
             android:textColor="@android:color/holo_red_light"/>
-
     <!--TODO: сделать согласно шаблону-->
     <TextView
             android:layout_width="wrap_content"
@@ -65,9 +66,7 @@
             android:text="@string/anonymous_button"
             android:id="@+id/anonymousButton"
 
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-
             android:background="@drawable/journeytheme_btn_default_holo_light"
-            android:textColor="@android:color/holo_red_light"/>
+            android:textColor="@android:color/holo_red_light"
+            android:layout_alignParentBottom="true"/>
 </RelativeLayout>
