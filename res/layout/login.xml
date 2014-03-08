@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LogoImageView"
+
+            android:src="@drawable/ic_launcher"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/LoginNameText"
+
+            android:layout_below="@id/LogoImageView"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/LoginPasswordText"
+
+            android:layout_below="@id/LoginNameText"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Войти"
+            android:id="@+id/LoginButton"
+
+            android:layout_below="@id/LoginPasswordText"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нет аккаунта?"
+            android:id="@+id/QuestionTextView"
+
+            android:layout_below="@+id/LoginButton"
+            android:layout_alignParentLeft="true"
+            />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Зарегистрироватся!"
+            android:id="@+id/SignUpTextView"
+
+            android:layout_below="@+id/LoginButton"
+            android:layout_alignParentRight="true"
+            />
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Войти без авторизации"
+            android:id="@+id/AnonymousButton"
+
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
