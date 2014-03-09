@@ -14,8 +14,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="ListPlacesActivity"
-                  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <activity android:name="ListPlacesActivity">
 
         </activity>
     </application>

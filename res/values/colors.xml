@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--login activity-->
+    <color name="white">#eeeeee</color>
+    <!--main_ menu-->
+    <color name="divider">#bebebf</color>
+
+
+</resources>
