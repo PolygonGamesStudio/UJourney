@@ -22,6 +22,7 @@
             android:ems="10"
             android:id="@+id/LoginNameText"
 
+            android:textColor="@color/white"
             android:background="@drawable/journeytheme_edit_text_holo_light"
             android:layout_below="@+id/LogoTextView" android:layout_alignParentLeft="true"
             android:layout_marginTop="48dp"/>
@@ -33,6 +34,7 @@
             android:id="@+id/LoginPasswordText"
             android:background="@drawable/journeytheme_edit_text_holo_light"
 
+            android:textColor="@color/white"
             android:layout_below="@id/LoginNameText"/>
     <Button
             android:layout_width="fill_parent"

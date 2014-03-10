@@ -5,12 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainMenuAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     String[] names = { "Случайно","Категории", "Предложения"};
+    String[] descriptions = { "Выбор случайного маршрута ...",
+            "Выбор маршрута по категориям ...",
+            "Рукомендованные Вам маршруты ..."
+            };
+    int[] icons = { R.drawable.menu_random, R.drawable.menu_category, R.drawable.menu_favorite};
 
     public MainMenuAdapter(Context ctx) {
         this.ctx = ctx;
@@ -18,6 +24,7 @@ public class MainMenuAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+
         return names.length;
     }
 
@@ -39,6 +46,8 @@ public class MainMenuAdapter extends BaseAdapter {
             convertView = lInflater.from(ctx).inflate(R.layout.element_list_main_menu, parent, false);
             holder = new ViewHolder();
             holder.text = (TextView) convertView.findViewById(R.id.headerTextView);
+            holder.descriptions = (TextView) convertView.findViewById(R.id.descriptionTextView);
+            holder.icon = (ImageView) convertView.findViewById(R.id.headerImageView);
 
             convertView.setTag(holder);
         }
@@ -47,6 +56,9 @@ public class MainMenuAdapter extends BaseAdapter {
         }
 
         holder.text.setText(names[position]);
+        holder.descriptions.setText(descriptions[position]);
+        holder.icon.setImageResource(icons[position]);
+
 
         return convertView;
 
