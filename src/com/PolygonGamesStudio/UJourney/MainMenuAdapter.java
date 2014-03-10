@@ -12,9 +12,10 @@ public class MainMenuAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     String[] names = { "Случайно","Категории", "Предложения"};
-    String[] descriptions = { "Выбор случайного маршрута ...",
-            "Выбор маршрута по категориям ...",
-            "Рукомендованные Вам маршруты ..."
+//  TODO: обтекание текста
+    String[] descriptions = { "Выбор случайного \n маршрута ...",
+            "Выбор маршрута \n по категориям ...",
+            "Рукомендованные Вам \n маршруты ..."
             };
     int[] icons = { R.drawable.menu_random, R.drawable.menu_category, R.drawable.menu_favorite};
 
