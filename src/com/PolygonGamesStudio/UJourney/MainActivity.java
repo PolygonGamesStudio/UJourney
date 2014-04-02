@@ -107,6 +107,7 @@ public class MainActivity extends ListActivity {
 
 			Log.d("Response: ", "> " + jsonStr);
 
+//            TODO: вынести разбор JSON в отдельный хелпер
 			if (jsonStr != null) {
 				try {
 					JSONObject jsonObj = new JSONObject(jsonStr);
@@ -160,7 +161,7 @@ public class MainActivity extends ListActivity {
 				pDialog.dismiss();
 			/**
 			 * Updating parsed JSON data into ListView
-			 * */
+			**/
 			ListAdapter adapter = new SimpleAdapter(
 					MainActivity.this, contactList,
 					R.layout.list_item, new String[] { TAG_NAME, TAG_EMAIL,
