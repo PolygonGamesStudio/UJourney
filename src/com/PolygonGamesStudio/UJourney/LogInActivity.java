@@ -28,7 +28,7 @@ public class LogInActivity extends Activity {
         loginButton.setOnClickListener(new  View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+                Intent intent = new Intent(LogInActivity.this, CategoryListActivity.class);
                 startActivity(intent);
             }
         });
