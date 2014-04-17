@@ -76,6 +76,6 @@
             android:layout_height="wrap_content"
             android:text="Профайл"
             android:id="@+id/profileButton"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="31dp" android:layout_marginBottom="27dp"/>
+            android:layout_below="@+id/SignUpTextView"
+            android:layout_centerHorizontal="true"/>
 </RelativeLayout>
