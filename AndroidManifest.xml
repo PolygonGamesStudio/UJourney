@@ -19,15 +19,15 @@
         </activity>
         <activity android:name="ListPlacesActivity"
                   android:screenOrientation="portrait">
-
         </activity>
         <activity android:name=".CategoryListActivity"
                   android:screenOrientation="portrait">
-
         </activity>
         <activity android:name=".SingleContactActivity"
                   android:screenOrientation="portrait">
-
+        </activity>
+        <activity android:name=".ProfileActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
     </application>

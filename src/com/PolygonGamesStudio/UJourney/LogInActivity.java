@@ -32,5 +32,14 @@ public class LogInActivity extends Activity {
                 startActivity(intent);
             }
         });
+        //        FIXME: Убрать нахуй
+        Button profileButton = (Button) findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new  View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LogInActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

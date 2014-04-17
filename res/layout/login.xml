@@ -69,4 +69,13 @@
 
             android:textColor="@android:color/holo_red_light"
             android:layout_alignParentBottom="true"/>
+
+    <!--FIXME: Убрать нахуй-->
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Профайл"
+            android:id="@+id/profileButton"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="31dp" android:layout_marginBottom="27dp"/>
 </RelativeLayout>
