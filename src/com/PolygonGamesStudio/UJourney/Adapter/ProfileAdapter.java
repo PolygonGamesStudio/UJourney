@@ -17,7 +17,7 @@ public class ProfileAdapter extends BaseAdapter {
             "6 марта 2014",
             "15 июля 2013"
     };
-    int[] icons = { R.drawable.menu_random, R.drawable.menu_category, R.drawable.menu_favorite};
+//    int[] icons = { R.drawable.menu_random, R.drawable.menu_category, R.drawable.menu_favorite};
 
     public ProfileAdapter(Context ctx) {
         this.ctx = ctx;
@@ -44,11 +44,11 @@ public class ProfileAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(ctx).inflate(R.layout.element_list_main_menu, parent, false);
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.profile_list_item, parent, false);
             holder = new ViewHolder();
             holder.text = (TextView) convertView.findViewById(R.id.headerTextView);
             holder.descriptions = (TextView) convertView.findViewById(R.id.descriptionTextView);
-            holder.icon = (ImageView) convertView.findViewById(R.id.headerImageView);
+//            holder.icon = (ImageView) convertView.findViewById(R.id.headerImageView);
 
             convertView.setTag(holder);
         }
@@ -58,7 +58,7 @@ public class ProfileAdapter extends BaseAdapter {
 
         holder.text.setText(names[position]);
         holder.descriptions.setText(descriptions[position]);
-        holder.icon.setImageResource(icons[position]);
+//        holder.icon.setImageResource(icons[position]);
 
 
         return convertView;

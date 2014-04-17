@@ -4,6 +4,8 @@
     <color name="white">#eeeeee</color>
     <!--main_ menu-->
     <color name="divider">#bebebf</color>
+    <color name="grey">#bebebf</color>
+
 
 
 </resources>

@@ -40,10 +40,16 @@
     <ListView android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/PlacesListView"
-              android:divider="@color/divider"
-              android:dividerHeight="1dp"
-              android:layout_below="@id/LastNameTextView">
 
+              android:layout_marginTop="12dp"
+              android:divider="@color/divider"
+              android:background="@color/white"
+              android:dividerHeight="1dp"
+              android:layout_below="@id/LastNameTextView"
+
+              android:padding="4dp"
+              android:footerDividersEnabled="false"
+              android:headerDividersEnabled="false">
     </ListView>
 
 

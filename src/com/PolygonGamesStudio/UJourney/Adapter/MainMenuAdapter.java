@@ -46,7 +46,7 @@ public class MainMenuAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = lInflater.from(ctx).inflate(R.layout.element_list_main_menu, parent, false);
+            convertView = lInflater.from(ctx).inflate(R.layout.main_menu_list_item, parent, false);
             holder = new ViewHolder();
             holder.text = (TextView) convertView.findViewById(R.id.headerTextView);
             holder.descriptions = (TextView) convertView.findViewById(R.id.descriptionTextView);
