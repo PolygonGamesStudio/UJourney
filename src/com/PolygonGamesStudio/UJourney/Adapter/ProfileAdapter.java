@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.PolygonGamesStudio.UJourney.Helper.ImageHelper;
 import com.PolygonGamesStudio.UJourney.Holder.ViewHolder;
 import com.PolygonGamesStudio.UJourney.R;
 
@@ -48,6 +49,8 @@ public class ProfileAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.text = (TextView) convertView.findViewById(R.id.headerTextView);
             holder.descriptions = (TextView) convertView.findViewById(R.id.descriptionTextView);
+//            ImageHelper.getRoundedCornerBitmap()
+//            TODO: кругляшки Битмап передавать в ImageView
 //            holder.icon = (ImageView) convertView.findViewById(R.id.headerImageView);
 
             convertView.setTag(holder);
