@@ -13,6 +13,8 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+//    TODO: "NJ GBPLTW!!!!!!
+
     public static final String HISTORY_TABLE = "history";
     public static final String HT_ID = "id";
     public static final String HT_TITLE = "title";

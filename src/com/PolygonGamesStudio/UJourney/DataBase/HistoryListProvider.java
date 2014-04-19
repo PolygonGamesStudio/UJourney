@@ -15,7 +15,6 @@ public class HistoryListProvider extends ContentProvider {
 
 
     private DBHelper dbHelper;
-    private SQLiteDatabase db;
 
     @Override
     public boolean onCreate() {
@@ -25,7 +24,7 @@ public class HistoryListProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        db = dbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query(DBHelper.HISTORY_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), HISTORY_CONTENT_URI);
         return cursor;

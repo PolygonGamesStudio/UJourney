@@ -56,6 +56,8 @@ public class TestService extends IntentService {
         String JSON_DESCRIPTION = "description";
         String JSON_PICTURE = "picture";
 
+        Log.d(LOG_TAG, "Hello");
+
         if (jsonStr != null) {
             try {
                 JSONObject jsonObj = new JSONObject(jsonStr);
@@ -65,6 +67,8 @@ public class TestService extends IntentService {
                     JSONObject c = category.getJSONObject(i);
 
                     HashMap<String, String> contact = new HashMap<String, String>();
+
+//                    TODO:тут вроде нехуя не работает, но логика верна
 
                     contact.put(JSON_TITLE, c.getString(JSON_TITLE));
                     contact.put(JSON_DESCRIPTION, c.getString(JSON_DESCRIPTION));
@@ -79,6 +83,8 @@ public class TestService extends IntentService {
             }
         }
 
+//        TODO: тут пишем в базу после
+//        А после CL сам подтянет и отрендерит во вьюхе
 
 
     }
