@@ -99,9 +99,7 @@ public class CategoryListActivity extends ListActivity {
 
 		@Override
 		protected Void doInBackground(Void... arg0) {
-			HttpConnectionHandler sh = new HttpConnectionHandler();
-
-			String jsonStr = sh.ServiceCall(url, "GET");
+			String jsonStr = HttpConnectionHandler.ServiceCall(url, "GET");
 
 			if (jsonStr != null) {
 				try {

@@ -4,7 +4,13 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import com.PolygonGamesStudio.UJourney.Handler.HttpConnectionHandler;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class TestService extends IntentService {
@@ -37,13 +43,43 @@ public class TestService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        for (int i = 1; i<=5; i++) {
-            Log.d(LOG_TAG, "i = " + i);
+        // TODO: передавать URL ! Парсер json
+        String url = "http://127.0.0.1:5000/api/v1.0/category";
+        String jsonStr = HttpConnectionHandler.ServiceCall(url, "GET");
+
+        JSONArray category;
+        ArrayList<HashMap<String, String>> categoryList = new ArrayList<HashMap<String, String>>();
+
+        String JSON_ROOT = "Category";
+
+        String JSON_TITLE = "title";
+        String JSON_DESCRIPTION = "description";
+        String JSON_PICTURE = "picture";
+
+        if (jsonStr != null) {
             try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
+                JSONObject jsonObj = new JSONObject(jsonStr);
+                category = jsonObj.getJSONArray(JSON_ROOT);
+
+                for (int i = 0; i < category.length(); i++) {
+                    JSONObject c = category.getJSONObject(i);
+
+                    HashMap<String, String> contact = new HashMap<String, String>();
+
+                    contact.put(JSON_TITLE, c.getString(JSON_TITLE));
+                    contact.put(JSON_DESCRIPTION, c.getString(JSON_DESCRIPTION));
+                    contact.put(JSON_PICTURE, c.getString(JSON_PICTURE));
+
+                    categoryList.add(contact);
+                }
+
+
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
+
+
     }
 }

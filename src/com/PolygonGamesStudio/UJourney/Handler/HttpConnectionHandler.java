@@ -10,11 +10,11 @@ import java.net.URL;
 
 public class HttpConnectionHandler {
 
-	private String response = null;
-
-	public String ServiceCall(String address, String method) {
+	static public String ServiceCall(String address, String method) {
 
         HttpURLConnection connection;
+        String response = null;
+
         try {
             URL url = new URL(address);
             connection = (HttpURLConnection) url.openConnection();
@@ -43,6 +43,7 @@ public class HttpConnectionHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         return response;
     }
 }

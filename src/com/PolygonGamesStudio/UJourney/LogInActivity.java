@@ -1,7 +1,6 @@
 package com.PolygonGamesStudio.UJourney;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +31,8 @@ public class LogInActivity extends Activity {
         Button loginButton = (Button) findViewById(R.id.LoginButton);
         loginButton.setOnClickListener(new  View.OnClickListener() {
             public void onClick(View v) {
+
+
 
                 Intent intent = new Intent(LogInActivity.this, CategoryListActivity.class);
                 startActivity(intent);
