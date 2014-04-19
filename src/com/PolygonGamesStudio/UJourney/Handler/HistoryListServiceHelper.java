@@ -3,6 +3,7 @@ package com.PolygonGamesStudio.UJourney.Handler;
 import android.content.Context;
 import android.os.Bundle;
 
+// TODO: И нахуй это нужно?
 public class HistoryListServiceHelper implements ServiceHelper {
 
     private final Context context;

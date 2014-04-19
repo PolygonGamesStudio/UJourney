@@ -33,7 +33,7 @@
                   android:screenOrientation="portrait">
         </activity>
 
-        <service android:name=".MyService" />
+        <service android:name=".Service.TestService" />
 
     </application>
 
