@@ -21,8 +21,7 @@ public class LogInActivity extends Activity {
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent;
-                intent = new Intent(LogInActivity.this, TestService.class);
+                Intent intent = new Intent(LogInActivity.this, TestService.class);
                 startService(intent);
 
                 Intent intent1 = new Intent(LogInActivity.this, ListPlacesActivity.class);
