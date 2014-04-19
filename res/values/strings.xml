@@ -8,5 +8,13 @@
     <string name="sign_up">Зарегистрироватся!</string>
     <string name="anonymous_button">Войти без авторизации</string>
 
+    <string-array name="menu_items">
+        <item>История</item>
+        <item>Избранное</item>
+        <item>Настройки</item>
+        <item>Выход</item>
+    </string-array>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>
