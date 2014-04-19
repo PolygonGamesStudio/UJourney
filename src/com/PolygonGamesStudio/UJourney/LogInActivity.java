@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.PolygonGamesStudio.UJourney.Service.TestService;
 
 public class LogInActivity extends Activity {
     /**
@@ -16,11 +17,14 @@ public class LogInActivity extends Activity {
         setContentView(R.layout.login);
 
         Button anonymousButton = (Button) findViewById(R.id.anonymousButton);
-        anonymousButton.setOnClickListener(new  View.OnClickListener() {
+        anonymousButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(LogInActivity.this, ListPlacesActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(LogInActivity.this, TestService.class);
+                startService(intent);
+
+                Intent intent1 = new Intent(LogInActivity.this, ListPlacesActivity.class);
+                startActivity(intent1);
             }
         });
 

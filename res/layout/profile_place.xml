@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background"
+                android:tileMode="repeat">
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/PhotoImageView"
+
+            android:src="@drawable/man_5_300x300"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Старбакс"
+            android:textColor="@color/white"
+
+            android:layout_marginTop="12dp"
+            android:id="@+id/NameTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/PhotoImageView"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="ул. Бауманская, д. 40"
+            android:textColor="@color/white"
+
+            android:id="@+id/addressTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/NameTextView"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="РЕЙТИНГ МЕСТА"
+            android:id="@+id/ratingHeaderTextView"
+
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/addressTextView" />
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@id/ratingHeaderTextView" android:id="@+id/view"/>
+    <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/placeRatingBar"
+
+            android:layout_below="@+id/view"
+            android:layout_alignParentStart="true"/>
+
+    <ListView android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/PlacesListView"
+
+              android:layout_marginTop="12dp"
+              android:divider="@color/divider"
+              android:background="@color/white"
+              android:dividerHeight="1dp"
+              android:layout_below="@id/placeRatingBar"
+
+              android:padding="4dp"
+              android:footerDividersEnabled="false"
+              android:headerDividersEnabled="false">
+    </ListView>
+
+
+</RelativeLayout>

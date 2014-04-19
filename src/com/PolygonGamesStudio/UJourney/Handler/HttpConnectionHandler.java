@@ -8,13 +8,13 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class ServiceHandler {
+public class HttpConnectionHandler {
 
-	static String response = null;
+	static public String ServiceCall(String address, String method) {
 
-	public String ServiceCall(String address, String method) {
+        HttpURLConnection connection;
+        String response = null;
 
-        HttpURLConnection connection = null;
         try {
             URL url = new URL(address);
             connection = (HttpURLConnection) url.openConnection();
@@ -30,7 +30,7 @@ public class ServiceHandler {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     while ((line = br.readLine()) != null) {
-                        sb.append(line+"\n");
+                        sb.append(line).append("\n");
                     }
                     br.close();
                     return sb.toString();
@@ -43,6 +43,7 @@ public class ServiceHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         return response;
     }
 }
