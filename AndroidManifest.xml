@@ -29,6 +29,12 @@
                   android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name=".ActivityForService"
+                  android:screenOrientation="portrait">
+        </activity>
+
+        <service android:name=".MyService" />
 
     </application>
+
 </manifest>

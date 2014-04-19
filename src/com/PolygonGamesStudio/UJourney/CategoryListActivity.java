@@ -3,7 +3,7 @@ package com.PolygonGamesStudio.UJourney;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.PolygonGamesStudio.UJourney.Handler.ServiceHandler;
+import com.PolygonGamesStudio.UJourney.Handler.HttpConnectionHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,7 +99,7 @@ public class CategoryListActivity extends ListActivity {
 
 		@Override
 		protected Void doInBackground(Void... arg0) {
-			ServiceHandler sh = new ServiceHandler();
+			HttpConnectionHandler sh = new HttpConnectionHandler();
 
 			String jsonStr = sh.ServiceCall(url, "GET");
 
@@ -136,7 +136,7 @@ public class CategoryListActivity extends ListActivity {
 					e.printStackTrace();
 				}
 			} else {
-				Log.e("ServiceHandler", "Couldn't get any data from the url");
+				Log.e("HttpConnectionHandler", "Couldn't get any data from the url");
 			}
 
 			return null;

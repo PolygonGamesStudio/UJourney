@@ -16,7 +16,7 @@ public class LogInActivity extends Activity {
         setContentView(R.layout.login);
 
         Button anonymousButton = (Button) findViewById(R.id.anonymousButton);
-        anonymousButton.setOnClickListener(new  View.OnClickListener() {
+        anonymousButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 Intent intent = new Intent(LogInActivity.this, ListPlacesActivity.class);
@@ -29,6 +29,15 @@ public class LogInActivity extends Activity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(LogInActivity.this, CategoryListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button goToServiceActivity = (Button) findViewById(R.id.goToActivityWithService);
+        goToServiceActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LogInActivity.this, ActivityForService.class);
                 startActivity(intent);
             }
         });

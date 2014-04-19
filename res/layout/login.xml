@@ -69,4 +69,8 @@
 
             android:textColor="@android:color/holo_red_light"
             android:layout_alignParentBottom="true"/>
+    <Button android:id="@+id/goToActivityWithService"
+            android:text="SERVICE"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
 </RelativeLayout>
