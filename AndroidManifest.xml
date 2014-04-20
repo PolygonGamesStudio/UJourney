@@ -28,10 +28,10 @@
                   android:screenOrientation="portrait">
         </activity>
         <!--SERVICE-->
-        <service android:name=".Service.TestService" />
+        <service android:name=".Service.HistoryService" />
         <!--PROVIDER-->
-        <provider android:name=".ContentProvider.MyContactsProvider"
-                  android:authorities="com.PolygonGamesStudio.UJourney.providers.AdressBook">
+        <provider android:name=".ContentProvider.HistoryContentProvider"
+                  android:authorities="com.PolygonGamesStudio.UJourney">
         </provider>
     </application>
 

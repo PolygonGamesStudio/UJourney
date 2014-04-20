@@ -1,13 +1,11 @@
 package com.PolygonGamesStudio.UJourney;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import com.PolygonGamesStudio.UJourney.Service.TestService;
+import com.PolygonGamesStudio.UJourney.Service.HistoryService;
 
 public class LogInActivity extends Activity {
     /**
@@ -23,7 +21,7 @@ public class LogInActivity extends Activity {
             public void onClick(View v) {
 
 //                FIXME: Тестовый сервис
-                Intent intent = new Intent(LogInActivity.this, TestService.class);
+                Intent intent = new Intent(LogInActivity.this, HistoryService.class);
                 startService(intent);
 
                 Intent intent1 = new Intent(LogInActivity.this, HistoryListActivity.class);

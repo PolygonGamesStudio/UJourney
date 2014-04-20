@@ -16,12 +16,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class TestService extends IntentService {
+public class HistoryService extends IntentService {
 
     final String LOG_TAG = "myLogs";
 
-    public TestService() {
-        super("TestService");
+    public HistoryService() {
+        super("HistoryService");
     }
 
     public void onCreate() {
@@ -54,7 +54,7 @@ public class TestService extends IntentService {
         String JSON_ROOT = "category";
 
         String JSON_TITLE = "title";
-        String JSON_DESCRIPTION = "description";
+        String JSON_VISIT = "visit";
         String JSON_PICTURE = "picture";
 
         JSONArray category;
@@ -63,17 +63,11 @@ public class TestService extends IntentService {
         ContentValues cv = new ContentValues();
 
         final Uri CONTACT_URI = Uri
-                .parse("content://com.PolygonGamesStudio.UJourney.providers.AdressBook/contacts");
+                .parse("content://com.PolygonGamesStudio.UJourney/history");
 
-        final String CONTACT_NAME = "name";
-        final String CONTACT_EMAIL = "email";
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        final String CONTACT_NAME = "title";
+        final String CONTACT_VISIT = "visit";
+        final String CONTACT_PICTURE = "picture";
 
         if (jsonStr != null) {
             try {
@@ -84,7 +78,8 @@ public class TestService extends IntentService {
                     JSONObject c = category.getJSONObject(i);
 
                     cv.put(CONTACT_NAME, c.getString(JSON_TITLE));
-                    cv.put(CONTACT_EMAIL, c.getString(JSON_DESCRIPTION));
+                    cv.put(CONTACT_VISIT, c.getString(JSON_VISIT));
+                    cv.put(CONTACT_PICTURE, c.getString(JSON_PICTURE));
 //                    TODO: Дропать и записывать, сейчс запись в конец
                     getContentResolver().insert(CONTACT_URI, cv);
 //                    c.getString(JSON_PICTURE)
