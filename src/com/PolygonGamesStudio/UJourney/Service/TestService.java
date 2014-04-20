@@ -1,7 +1,9 @@
 package com.PolygonGamesStudio.UJourney.Service;
 
 import android.app.IntentService;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.IBinder;
 import android.util.Log;
 import com.PolygonGamesStudio.UJourney.Handler.HttpConnectionHandler;
@@ -11,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class TestService extends IntentService {
@@ -44,19 +47,26 @@ public class TestService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         // TODO: передавать URL ! Парсер json
-        String url = "http://127.0.0.1:5000/api/v1.0/category";
+
+        String url = "http://192.168.1.15:5000/api/v1.0/category";
         String jsonStr = HttpConnectionHandler.ServiceCall(url, "GET");
 
-        JSONArray category;
-        ArrayList<HashMap<String, String>> categoryList = new ArrayList<HashMap<String, String>>();
-
-        String JSON_ROOT = "Category";
+        String JSON_ROOT = "category";
 
         String JSON_TITLE = "title";
         String JSON_DESCRIPTION = "description";
         String JSON_PICTURE = "picture";
 
-        Log.d(LOG_TAG, "Hello");
+        JSONArray category;
+
+
+        ContentValues cv = new ContentValues();
+
+        final Uri CONTACT_URI = Uri
+                .parse("content://com.PolygonGamesStudio.UJourney.providers.AdressBook/contacts");
+
+        final String CONTACT_NAME = "name";
+        final String CONTACT_EMAIL = "email";
 
         if (jsonStr != null) {
             try {
@@ -66,15 +76,10 @@ public class TestService extends IntentService {
                 for (int i = 0; i < category.length(); i++) {
                     JSONObject c = category.getJSONObject(i);
 
-                    HashMap<String, String> contact = new HashMap<String, String>();
-
-//                    TODO:тут вроде нехуя не работает, но логика верна
-
-                    contact.put(JSON_TITLE, c.getString(JSON_TITLE));
-                    contact.put(JSON_DESCRIPTION, c.getString(JSON_DESCRIPTION));
-                    contact.put(JSON_PICTURE, c.getString(JSON_PICTURE));
-
-                    categoryList.add(contact);
+                    cv.put(CONTACT_NAME, c.getString(JSON_TITLE));
+                    cv.put(CONTACT_EMAIL, c.getString(JSON_DESCRIPTION));
+                    Uri newUri = getContentResolver().insert(CONTACT_URI, cv);
+//                    c.getString(JSON_PICTURE)
                 }
 
 
@@ -82,10 +87,5 @@ public class TestService extends IntentService {
                 e.printStackTrace();
             }
         }
-
-//        TODO: тут пишем в базу после
-//        А после CL сам подтянет и отрендерит во вьюхе
-
-
     }
 }

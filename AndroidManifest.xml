@@ -29,12 +29,12 @@
         <activity android:name=".ProfileActivity"
                   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ActivityForService"
-                  android:screenOrientation="portrait">
-        </activity>
-
+        <!--SERVICE-->
         <service android:name=".Service.TestService" />
-
+        <!--PROVIDER-->
+        <provider android:name=".DataBase.MyContactsProvider"
+                  android:authorities="com.PolygonGamesStudio.UJourney.providers.AdressBook">
+        </provider>
     </application>
 
 </manifest>
