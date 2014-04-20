@@ -68,6 +68,13 @@ public class TestService extends IntentService {
         final String CONTACT_NAME = "name";
         final String CONTACT_EMAIL = "email";
 
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         if (jsonStr != null) {
             try {
                 JSONObject jsonObj = new JSONObject(jsonStr);

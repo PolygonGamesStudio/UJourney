@@ -26,7 +26,7 @@ public class LogInActivity extends Activity {
                 Intent intent = new Intent(LogInActivity.this, TestService.class);
                 startService(intent);
 
-                Intent intent1 = new Intent(LogInActivity.this, LoaderCallbacksTest.class);
+                Intent intent1 = new Intent(LogInActivity.this, HistoryListActivity.class);
                 startActivity(intent1);
             }
         });

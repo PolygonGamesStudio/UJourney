@@ -20,7 +20,7 @@
         <activity android:name="ListPlacesActivity"
                   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".LoaderCallbacksTest"
+        <activity android:name=".HistoryListActivity"
                   android:screenOrientation="portrait">
         </activity>
 
