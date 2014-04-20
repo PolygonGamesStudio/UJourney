@@ -26,7 +26,7 @@ public class LogInActivity extends Activity {
                 Intent intent = new Intent(LogInActivity.this, TestService.class);
                 startService(intent);
 
-                Intent intent1 = new Intent(LogInActivity.this, ListPlacesActivity.class);
+                Intent intent1 = new Intent(LogInActivity.this, LoaderCallbacksTest.class);
                 startActivity(intent1);
             }
         });
@@ -34,9 +34,6 @@ public class LogInActivity extends Activity {
         Button loginButton = (Button) findViewById(R.id.LoginButton);
         loginButton.setOnClickListener(new  View.OnClickListener() {
             public void onClick(View v) {
-
-                Intent intent = new Intent(LogInActivity.this, CategoryListActivity.class);
-                startActivity(intent);
             }
         });
 

@@ -1,4 +1,4 @@
-package com.PolygonGamesStudio.UJourney.DataBase;
+package com.PolygonGamesStudio.UJourney.ContentProvider;
 
 /**
  * Created by user1 on 4/20/14.

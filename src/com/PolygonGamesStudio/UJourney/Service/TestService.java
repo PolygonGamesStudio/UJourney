@@ -78,7 +78,8 @@ public class TestService extends IntentService {
 
                     cv.put(CONTACT_NAME, c.getString(JSON_TITLE));
                     cv.put(CONTACT_EMAIL, c.getString(JSON_DESCRIPTION));
-                    Uri newUri = getContentResolver().insert(CONTACT_URI, cv);
+//                    TODO: Дропать и записывать, сейчс запись в конец
+                    getContentResolver().insert(CONTACT_URI, cv);
 //                    c.getString(JSON_PICTURE)
                 }
 

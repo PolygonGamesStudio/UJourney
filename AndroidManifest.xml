@@ -20,19 +20,17 @@
         <activity android:name="ListPlacesActivity"
                   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".CategoryListActivity"
+        <activity android:name=".LoaderCallbacksTest"
                   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".SingleContactActivity"
-                  android:screenOrientation="portrait">
-        </activity>
+
         <activity android:name=".ProfileActivity"
                   android:screenOrientation="portrait">
         </activity>
         <!--SERVICE-->
         <service android:name=".Service.TestService" />
         <!--PROVIDER-->
-        <provider android:name=".DataBase.MyContactsProvider"
+        <provider android:name=".ContentProvider.MyContactsProvider"
                   android:authorities="com.PolygonGamesStudio.UJourney.providers.AdressBook">
         </provider>
     </application>

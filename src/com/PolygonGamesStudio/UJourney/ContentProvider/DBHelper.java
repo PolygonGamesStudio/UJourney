@@ -1,4 +1,4 @@
-package com.PolygonGamesStudio.UJourney.DataBase;
+package com.PolygonGamesStudio.UJourney.ContentProvider;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

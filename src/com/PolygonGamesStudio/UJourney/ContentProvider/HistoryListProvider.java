@@ -1,4 +1,4 @@
-package com.PolygonGamesStudio.UJourney.DataBase;
+package com.PolygonGamesStudio.UJourney.ContentProvider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
