@@ -44,6 +44,7 @@ public class LoaderCallbacksTest extends ListActivity implements LoaderManager.L
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         switch (loader.getId()) {
             case LOADER_ID:
+//              TODO:  java.lang.NullPointerException -> mAdapter
                 mAdapter.swapCursor(data);
                 break;
         }
