@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
+import com.squareup.picasso.Picasso;
 
 public class LogInActivity extends Activity {
     /**
@@ -15,6 +17,9 @@ public class LogInActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        ImageView imageView = (ImageView) findViewById(R.id.LogoTextView);
+        Picasso.with(LogInActivity.this).load("http://i.imgur.com/DvpvklR.png").into(imageView);
 
         Button anonymousButton = (Button) findViewById(R.id.anonymousButton);
         anonymousButton.setOnClickListener(new View.OnClickListener() {
