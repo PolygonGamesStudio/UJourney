@@ -11,5 +11,13 @@
     <!--history-list-->
     <string name="history_list_header">ИСТОРИЯ МАРШРУТОВ</string>
 
+    <string-array name="activity_list">
+        <item>История</item>
+        <item>Избранное</item>
+        <item>НАстройки</item>
+        <item>Выход</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
 </resources>
