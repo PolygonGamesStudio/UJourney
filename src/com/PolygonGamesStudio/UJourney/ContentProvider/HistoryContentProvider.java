@@ -21,14 +21,15 @@ public class HistoryContentProvider extends ContentProvider {
 
     static final String CONTACT_TABLE = "history";
 
-    static final String CONTACT_ID = "_id";
+    static final String CONTACT_ID_ANDROID = "_id";
+    static final String CONTACT_ID = "id";
     static final String CONTACT_TITLE = "title";
     static final String CONTACT_VISIT = "visit";
     static final String CONTACT_PICTURE = "picture";
 
     static final String DB_CREATE = "create table " + CONTACT_TABLE + "("
-            + CONTACT_ID + " integer primary key autoincrement, "
-            + CONTACT_TITLE + " text, " + CONTACT_PICTURE + " text, " + CONTACT_VISIT + " text" + ");";
+            + CONTACT_ID_ANDROID + " integer primary key autoincrement, "
+            +CONTACT_ID + " integer unique, " + CONTACT_TITLE + " text, " + CONTACT_PICTURE + " text, " + CONTACT_VISIT + " text" + ");";
 
     static final String AUTHORITY = "com.PolygonGamesStudio.UJourney";
 
@@ -67,9 +68,9 @@ public class HistoryContentProvider extends ContentProvider {
             case URI_CONTACTS_ID: // Uri с ID
                 String id = uri.getLastPathSegment();
                 if (TextUtils.isEmpty(selection)) {
-                    selection = CONTACT_ID + " = " + id;
+                    selection = CONTACT_ID_ANDROID + " = " + id;
                 } else {
-                    selection = selection + " AND " + CONTACT_ID + " = " + id;
+                    selection = selection + " AND " + CONTACT_ID_ANDROID + " = " + id;
                 }
                 break;
             default:

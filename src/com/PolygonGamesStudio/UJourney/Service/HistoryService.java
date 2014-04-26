@@ -53,6 +53,7 @@ public class HistoryService extends IntentService {
 
         String JSON_ROOT = "category";
 
+        String JSON_ID = "id";
         String JSON_TITLE = "title";
         String JSON_VISIT = "visit";
         String JSON_PICTURE = "picture";
@@ -65,6 +66,7 @@ public class HistoryService extends IntentService {
         final Uri CONTACT_URI = Uri
                 .parse("content://com.PolygonGamesStudio.UJourney/history");
 
+        final String CONTACT_ID = "id";
         final String CONTACT_NAME = "title";
         final String CONTACT_VISIT = "visit";
         final String CONTACT_PICTURE = "picture";
@@ -77,10 +79,12 @@ public class HistoryService extends IntentService {
                 for (int i = 0; i < category.length(); i++) {
                     JSONObject c = category.getJSONObject(i);
 
+
+                    cv.put(CONTACT_ID, c.getString(JSON_ID));
                     cv.put(CONTACT_NAME, c.getString(JSON_TITLE));
                     cv.put(CONTACT_VISIT, c.getString(JSON_VISIT));
                     cv.put(CONTACT_PICTURE, c.getString(JSON_PICTURE));
-//                    TODO: Дропать и записывать, сейчс запись в конец
+
                     getContentResolver().insert(CONTACT_URI, cv);
 //                    c.getString(JSON_PICTURE)
                 }
