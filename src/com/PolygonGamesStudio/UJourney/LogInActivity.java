@@ -18,9 +18,6 @@ public class LogInActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        ImageView imageView = (ImageView) findViewById(R.id.LogoTextView);
-        Picasso.with(LogInActivity.this).load("http://i.imgur.com/DvpvklR.png").into(imageView);
-
         Button anonymousButton = (Button) findViewById(R.id.anonymousButton);
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

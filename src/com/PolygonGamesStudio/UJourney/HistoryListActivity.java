@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.HistoryContentProvider;
+import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.HistorySimpleCursorAdapter;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -20,8 +21,8 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_list);
-        scAdapter = new SimpleCursorAdapter(this, R.layout.test_list_item, null, PROJECTION, viewID, 0);
+        setContentView(R.layout.history_list);
+        scAdapter = new HistorySimpleCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.lvData);
         lvData.setAdapter(scAdapter);
 
