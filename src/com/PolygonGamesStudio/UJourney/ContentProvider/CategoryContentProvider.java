@@ -1,39 +1,31 @@
 package com.PolygonGamesStudio.UJourney.ContentProvider;
 
-/**
- * Created by user1 on 4/20/14.
- */
-import android.content.ContentProvider;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.UriMatcher;
+import android.content.*;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.text.TextUtils;
 
-public class HistoryContentProvider extends ContentProvider {
+public class CategoryContentProvider extends ContentProvider {
 
     static final String DB_NAME = "mydb";
     static final int DB_VERSION = 1;
 
-    static final String CONTACT_TABLE = "history";
+    static final String CONTACT_TABLE = "category";
 
     static final String CONTACT_ID_ANDROID = "_id";
     static final String CONTACT_ID = "id";
     static final String CONTACT_TITLE = "title";
-    static final String CONTACT_VISIT = "visit";
     static final String CONTACT_PICTURE = "picture";
 
     static final String DB_CREATE = "create table " + CONTACT_TABLE + "("
             + CONTACT_ID_ANDROID + " integer primary key autoincrement, "
-            +CONTACT_ID + " integer unique, " + CONTACT_TITLE + " text, " + CONTACT_PICTURE + " text, " + CONTACT_VISIT + " text" + ");";
+            +CONTACT_ID + " integer unique, " + CONTACT_TITLE + " text, " + CONTACT_PICTURE + " text" + ");";
 
-    static final String AUTHORITY = "history";
+    static final String AUTHORITY = "category";
 
-    static final String CONTACT_PATH = "history";
+    static final String CONTACT_PATH = "category";
 
     public static final Uri CONTACT_CONTENT_URI = Uri.parse("content://"
             + AUTHORITY + "/" + CONTACT_PATH);
@@ -52,12 +44,13 @@ public class HistoryContentProvider extends ContentProvider {
     DBHelper dbHelper;
     SQLiteDatabase db;
 
+    @Override
     public boolean onCreate() {
         dbHelper = new DBHelper(getContext());
         return true;
     }
 
-    // чтение
+    @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         switch (uriMatcher.match(uri)) {
             case URI_CONTACTS: // общий Uri
@@ -78,11 +71,16 @@ public class HistoryContentProvider extends ContentProvider {
         }
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query(CONTACT_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
-        cursor.setNotificationUri(getContext().getContentResolver(),
-                CONTACT_CONTENT_URI);
+        cursor.setNotificationUri(getContext().getContentResolver(), CONTACT_CONTENT_URI);
         return cursor;
     }
 
+    @Override
+    public String getType(Uri uri) {
+        return null;
+    }
+
+    @Override
     public Uri insert(Uri uri, ContentValues values) {
         if (uriMatcher.match(uri) != URI_CONTACTS)
             throw new IllegalArgumentException("Wrong URI: " + uri);
@@ -95,16 +93,14 @@ public class HistoryContentProvider extends ContentProvider {
         return resultUri;
     }
 
+    @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         return 0;
     }
 
+    @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         return 0;
-    }
-
-    public String getType(Uri uri) {
-        return null;
     }
 
     private class DBHelper extends SQLiteOpenHelper {

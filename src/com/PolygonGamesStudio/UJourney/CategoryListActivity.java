@@ -9,25 +9,25 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import com.PolygonGamesStudio.UJourney.ContentProvider.HistoryContentProvider;
+import com.PolygonGamesStudio.UJourney.ContentProvider.CategoryContentProvider;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
 
-public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
+public class CategoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
     SimpleCursorAdapter scAdapter;
 
-    private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
-    private static final int[] viewID =  new  int[]{R.id.textID, R.id.textTitle, R.id.textVisit, R.id.textPicture};
+    private static final String[] PROJECTION =  new  String[]{"_id", "title", "picture"};
+    private static final int[] viewID =  new  int[]{R.id.textID, R.id.textTitle, R.id.textPicture};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_list);
+        setContentView(R.layout.category_list);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        scAdapter = new JourneySimpleCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
+        scAdapter = new JourneySimpleCursorAdapter(this, R.layout.category_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.lvData);
         lvData.setAdapter(scAdapter);
 
@@ -38,7 +38,7 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(HistoryListActivity.this, HistoryContentProvider.CONTACT_CONTENT_URI, PROJECTION, null, null, null);
+        return new CursorLoader(CategoryListActivity.this, CategoryContentProvider.CONTACT_CONTENT_URI, PROJECTION, null, null, null);
     }
 
     @Override
@@ -52,3 +52,4 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
     }
 
 }
+
