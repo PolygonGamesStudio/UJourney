@@ -3,7 +3,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:padding="12dp">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/history_list_header"
+            android:id="@+id/headerTextView"
+
+            android:layout_marginLeft="12dp"
+            android:textColor="@android:color/black"
+            android:layout_alignParentTop="true"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"
+
+            android:paddingTop="24dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_below="@id/headerTextView"/>
+
     <ListView
             android:id="@+id/lvData"
             android:layout_width="match_parent"
