@@ -1,5 +1,6 @@
 package com.PolygonGamesStudio.UJourney;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -22,6 +23,10 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_list);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         scAdapter = new HistorySimpleCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.lvData);
         lvData.setAdapter(scAdapter);
