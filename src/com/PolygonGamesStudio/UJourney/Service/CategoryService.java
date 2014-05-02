@@ -11,11 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class HistoryService extends IntentService {
+public class CategoryService extends IntentService {
 
-
-    public HistoryService() {
-        super("HistoryService");
+    public CategoryService() {
+        super("CategoryService");
     }
 
     public void onCreate() {
@@ -38,14 +37,13 @@ public class HistoryService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         // TODO: передавать URL ! Парсер json
 
-        String url = "http://192.168.1.15:5000/api/v1.0/history";
+        String url = "http://192.168.1.15:5000/api/v1.0/category";
         String jsonStr = HttpConnectionHandler.ServiceCall(url, "GET");
 
-        String JSON_ROOT = "history";
+        String JSON_ROOT = "category";
 
         String JSON_ID = "id";
         String JSON_TITLE = "title";
-        String JSON_VISIT = "visit";
         String JSON_PICTURE = "picture";
 
         JSONArray category;
@@ -54,11 +52,10 @@ public class HistoryService extends IntentService {
         ContentValues cv = new ContentValues();
 
         final Uri CONTACT_URI = Uri
-                .parse("content://"+ CacheContentProvider.AUTHORITY +"/" + CacheContentProvider.HISTORY_PATH);
+                .parse("content://"+ CacheContentProvider.AUTHORITY +"/" + CacheContentProvider.CATEGORY_PATH);
 
         final String CONTACT_ID = "id";
         final String CONTACT_NAME = "title";
-        final String CONTACT_VISIT = "visit";
         final String CONTACT_PICTURE = "picture";
 
         if (jsonStr != null) {
@@ -72,7 +69,6 @@ public class HistoryService extends IntentService {
 
                     cv.put(CONTACT_ID, c.getString(JSON_ID));
                     cv.put(CONTACT_NAME, c.getString(JSON_TITLE));
-                    cv.put(CONTACT_VISIT, c.getString(JSON_VISIT));
                     cv.put(CONTACT_PICTURE, c.getString(JSON_PICTURE));
 
                     getContentResolver().insert(CONTACT_URI, cv);

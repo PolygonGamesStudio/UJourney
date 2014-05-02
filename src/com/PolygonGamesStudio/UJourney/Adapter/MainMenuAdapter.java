@@ -15,7 +15,8 @@ public class MainMenuAdapter extends BaseAdapter {
     LayoutInflater lInflater;
     String[] names = { "Случайно","Категории", "Предложения"};
 //  TODO: обтекание текста
-    String[] descriptions = { "Выбор случайного \n маршрута ...",
+    String[] descriptions = {
+            "Выбор случайного \n маршрута ...",
             "Выбор маршрута \n по категориям ...",
             "Рекомендованные \n маршруты ..."
             };
@@ -27,7 +28,6 @@ public class MainMenuAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-
         return names.length;
     }
 

@@ -14,18 +14,21 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by user1 on 4/26/14.
  */
-public class HistorySimpleCursorAdapter extends SimpleCursorAdapter{
+public class JourneySimpleCursorAdapter extends SimpleCursorAdapter{
 
     Context context_instance;
 
-    public HistorySimpleCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+    public JourneySimpleCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
         this.context_instance = context;
     }
 
     @Override
     public void setViewImage(ImageView v, String value) {
-        Picasso.with(context_instance).load(value).transform(new Transformation() {
+        int wightImage = 200;
+        int heightImage = 200;
+
+        Picasso.with(context_instance).load(value).resize(wightImage, heightImage).transform(new Transformation() {
             @Override
             public Bitmap transform(Bitmap source) {
                 int size = Math.min(source.getWidth(), source.getHeight());
