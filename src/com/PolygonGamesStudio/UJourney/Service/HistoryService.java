@@ -5,16 +5,11 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
-import android.util.Log;
+import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Handler.HttpConnectionHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class HistoryService extends IntentService {
 
@@ -59,7 +54,7 @@ public class HistoryService extends IntentService {
         ContentValues cv = new ContentValues();
 
         final Uri CONTACT_URI = Uri
-                .parse("content://history/history");
+                .parse("content://"+ CacheContentProvider.AUTHORITY +"/" + CacheContentProvider.HISTORY_PATH);
 
         final String CONTACT_ID = "id";
         final String CONTACT_NAME = "title";

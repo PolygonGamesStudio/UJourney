@@ -34,11 +34,8 @@
         <service android:name=".Service.HistoryService" />
         <service android:name=".Service.CategoryService" />
         <!--PROVIDER-->
-        <provider android:name=".ContentProvider.HistoryContentProvider"
-                  android:authorities="history">
-        </provider>
-        <provider android:name=".ContentProvider.CategoryContentProvider"
-                  android:authorities="category">
+        <provider android:name=".ContentProvider.CacheContentProvider"
+                  android:authorities="cache">
         </provider>
     </application>
 

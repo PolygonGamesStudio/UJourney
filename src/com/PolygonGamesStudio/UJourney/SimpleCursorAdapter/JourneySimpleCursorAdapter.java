@@ -25,7 +25,10 @@ public class JourneySimpleCursorAdapter extends SimpleCursorAdapter{
 
     @Override
     public void setViewImage(ImageView v, String value) {
-        Picasso.with(context_instance).load(value).transform(new Transformation() {
+        int wightImage = 200;
+        int heightImage = 200;
+
+        Picasso.with(context_instance).load(value).resize(wightImage, heightImage).transform(new Transformation() {
             @Override
             public Bitmap transform(Bitmap source) {
                 int size = Math.min(source.getWidth(), source.getHeight());

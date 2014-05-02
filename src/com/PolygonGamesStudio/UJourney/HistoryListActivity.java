@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import com.PolygonGamesStudio.UJourney.ContentProvider.HistoryContentProvider;
+import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
@@ -38,7 +38,7 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(HistoryListActivity.this, HistoryContentProvider.CONTACT_CONTENT_URI, PROJECTION, null, null, null);
+        return new CursorLoader(HistoryListActivity.this, CacheContentProvider.HISTORY_CONTENT_URI, PROJECTION, null, null, null);
     }
 
     @Override
