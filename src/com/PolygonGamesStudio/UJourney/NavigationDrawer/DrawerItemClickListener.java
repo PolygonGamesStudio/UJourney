@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.PolygonGamesStudio.UJourney.HistoryListActivity;
 import com.PolygonGamesStudio.UJourney.LogInActivity;
 import com.PolygonGamesStudio.UJourney.ProfileActivity;
+
+import java.util.zip.Inflater;
 
 /**
  * Created by root on 4/26/14.
@@ -27,10 +30,22 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
-        if (position == 3){
+        if (position == 0){
+            Intent intent = new Intent(parentActivity, ProfileActivity.class);
+            parentActivity.startActivity(intent);
+        }
+
+        if (position == 1){
+            Intent intent = new Intent(parentActivity, HistoryListActivity.class);
+            parentActivity.startActivity(intent);
+        }
+
+        if (position == 4){
             Intent intent = new Intent(parentActivity, LogInActivity.class);
             parentActivity.startActivity(intent);
         }
+
+
 
         // Create a new fragment and specify the planet to show based on position
 //        Fragment fragment = new PlanetFragment();

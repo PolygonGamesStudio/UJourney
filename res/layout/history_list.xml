@@ -1,34 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" android:padding="12dp">
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/history_list_header"
-            android:id="@+id/headerTextView"
-
-            android:layout_marginLeft="12dp"
-            android:textColor="@android:color/black"
-            android:layout_alignParentTop="true"/>
-
-    <View
+    <!-- The main content view -->
+    <FrameLayout
+            android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"
+            android:layout_height="match_parent">
 
-            android:paddingTop="24dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:layout_below="@id/headerTextView"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent" android:padding="12dp">
 
-    <ListView
-            android:id="@+id/lvData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"/>
-</LinearLayout>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/history_list_header"
+                    android:id="@+id/headerTextView"
+
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@android:color/black"
+                    android:layout_alignParentTop="true"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/darker_gray"
+
+                    android:paddingTop="24dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_below="@id/headerTextView"/>
+
+            <ListView
+                    android:id="@+id/lvData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"/>
+        </LinearLayout>
+    </FrameLayout>
+    <!-- The navigation drawer -->
+    <ListView android:id="@+id/left_drawer"
+              android:layout_width="240dp"
+              android:layout_height="match_parent"
+              android:layout_gravity="start"
+              android:choiceMode="singleChoice"
+              android:divider="@android:color/transparent"
+              android:dividerHeight="0dp"
+              android:background="#111"/>
+</android.support.v4.widget.DrawerLayout>

@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
+import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
+import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItems;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
@@ -46,8 +48,14 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         ListView lvData = (ListView) findViewById(R.id.lvData);
         lvData.setAdapter(scAdapter);
 
+        initDrawer();
 
+        registerForContextMenu(lvData);
+        getLoaderManager().initLoader(0, null, this);
 
+    }
+
+    private void initDrawer(){
         mActivityList = getResources().getStringArray(R.array.activity_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -56,7 +64,7 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mActivityList));
         // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
 
 
         mTitle = mDrawerTitle = getTitle();
@@ -81,38 +89,6 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-
-        registerForContextMenu(lvData);
-        getLoaderManager().initLoader(0, null, this);
-
-    }
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
-    /** Swaps fragments in the main content view */
-    private void selectItem(int position) {
-        // Create a new fragment and specify the planet to show based on position
-//        Fragment fragment = new PlanetFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-//        fragment.setArguments(args);
-//
-//        // Insert the fragment by replacing any existing fragment
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.content_frame, fragment)
-//                .commit();
-//
-//        // Highlight the selected item, update the title, and close the drawer
-//        mDrawerList.setItemChecked(position, true);
-//        setTitle(mPlanetTitles[position]);
-//        mDrawerLayout.closeDrawer(mDrawerList);
     }
 
     @Override

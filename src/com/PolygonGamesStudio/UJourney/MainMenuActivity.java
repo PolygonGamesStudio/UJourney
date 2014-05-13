@@ -30,17 +30,17 @@ public class MainMenuActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
-
+//
         mActivityList = getResources().getStringArray(R.array.activity_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+//
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mActivityList));
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mActivityList));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
         mTitle = mDrawerTitle = getTitle();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.icon, R.string.drawer_open, R.string.drawer_close) {
 
@@ -92,34 +92,6 @@ public class MainMenuActivity extends Activity{
                 }
             }
         });
-
-
     }
 
-//    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-//        @Override
-//        public void onItemClick(AdapterView parent, View view, int position, long id) {
-//            selectItem(position);
-//        }
-//    }
-//
-//    /** Swaps fragments in the main content view */
-//    private void selectItem(int position) {
-//        // Create a new fragment and specify the planet to show based on position
-////        Fragment fragment = new PlanetFragment();
-////        Bundle args = new Bundle();
-////        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-////        fragment.setArguments(args);
-////
-////        // Insert the fragment by replacing any existing fragment
-////        FragmentManager fragmentManager = getFragmentManager();
-////        fragmentManager.beginTransaction()
-////                .replace(R.id.content_frame, fragment)
-////                .commit();
-////
-////        // Highlight the selected item, update the title, and close the drawer
-////        mDrawerList.setItemChecked(position, true);
-////        setTitle(mPlanetTitles[position]);
-////        mDrawerLayout.closeDrawer(mDrawerList);
-//    }
 }

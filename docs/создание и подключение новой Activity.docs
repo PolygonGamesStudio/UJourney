@@ -1,0 +1,78 @@
+пока так:
+
+в layout-файле:
+    завернуть все, что есть в FrameLayout, в общем по примеру:
+
+    <android.support.v4.widget.DrawerLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <!-- The main content view -->
+        <FrameLayout
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- ALL YOU'RE CODE MUST BE HERE! -->
+
+        </FrameLayout>
+        <!-- The navigation drawer -->
+        <ListView android:id="@+id/left_drawer"
+                  android:layout_width="240dp"
+                  android:layout_height="match_parent"
+                  android:layout_gravity="start"
+                  android:choiceMode="singleChoice"
+                  android:divider="@android:color/transparent"
+                  android:dividerHeight="0dp"
+                  android:background="#111"/>
+    </android.support.v4.widget.DrawerLayout>
+-----------------------------------------------------------------------
+В классе новой активити:
+  0) добавляем поля:
+        private String[] mActivityList;
+        private DrawerLayout mDrawerLayout;
+        private ActionBarDrawerToggle mDrawerToggle;
+        private CharSequence mDrawerTitle;
+        private CharSequence mTitle;
+        private ListView mDrawerList;
+
+  1)добавляем метод:
+      private void initDrawer(){
+              mActivityList = getResources().getStringArray(R.array.activity_list);
+              mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+              mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+              // Set the adapter for the list view
+              mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                      R.layout.drawer_list_item, mActivityList));
+              // Set the list's click listener
+              mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
+
+
+              mTitle = mDrawerTitle = getTitle();
+              mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+              mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                      R.drawable.icon, R.string.drawer_open, R.string.drawer_close) {
+
+                  /** Called when a drawer has settled in a completely closed state. */
+                  public void onDrawerClosed(View view) {
+                      super.onDrawerClosed(view);
+                      getActionBar().setTitle(mTitle);
+                      invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                  }
+
+                  /** Called when a drawer has settled in a completely open state. */
+                  public void onDrawerOpened(View drawerView) {
+                      super.onDrawerOpened(drawerView);
+                      getActionBar().setTitle(mDrawerTitle);
+                      invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                  }
+              };
+
+              // Set the drawer toggle as the DrawerListener
+              mDrawerLayout.setDrawerListener(mDrawerToggle);
+      }
+  2) в onCreate() вызываем метод:
+        initDrawer();
