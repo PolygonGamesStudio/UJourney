@@ -14,7 +14,7 @@
     <string-array name="activity_list">
         <item>История</item>
         <item>Избранное</item>
-        <item>НАстройки</item>
+        <item>Настройки</item>
         <item>Выход</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
