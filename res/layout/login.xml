@@ -71,11 +71,4 @@
             android:layout_alignParentBottom="true"/>
 
     <!--FIXME: Убрать нахуй-->
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Профайл"
-            android:id="@+id/profileButton"
-            android:layout_below="@+id/SignUpTextView"
-            android:layout_centerHorizontal="true"/>
 </RelativeLayout>

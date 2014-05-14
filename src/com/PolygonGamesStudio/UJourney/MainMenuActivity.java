@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 public class MainMenuActivity extends Activity{
     private String[] mActivityList;
 
-    private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -32,7 +31,7 @@ public class MainMenuActivity extends Activity{
         setContentView(R.layout.main_menu);
 //
         mActivityList = getResources().getStringArray(R.array.activity_list);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 //
         // Set the adapter for the list view
@@ -68,26 +67,17 @@ public class MainMenuActivity extends Activity{
         lvMainMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//              0 - Случайно
-//              1 - Категории
-//              2 - Предложения
                 switch (position) {
-                    case 0:
-
+                    case 0:  // 0 - Случайно
                         break;
-                    case 1:
+                    case 1:  // 1 - Категории
                         Intent service = new Intent(MainMenuActivity.this, CategoryService.class);
                         startService(service);
 
                         Intent intent = new Intent(MainMenuActivity.this, CategoryListActivity.class);
                         startActivity(intent);
                         break;
-                    case 2:
-                        Intent service_1 = new Intent(MainMenuActivity.this, HistoryService.class);
-                        startService(service_1);
-
-                        Intent intent_1 = new Intent(MainMenuActivity.this, HistoryListActivity.class);
-                        startActivity(intent_1);
+                    case 2:  // 2 - Предложения
                         break;
                 }
             }
