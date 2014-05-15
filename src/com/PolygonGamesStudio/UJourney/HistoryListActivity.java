@@ -10,13 +10,13 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
-import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItems;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
@@ -26,15 +26,8 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
     private static final int[] viewID =  new  int[]{R.id.textID, R.id.textTitle, R.id.textVisit, R.id.textPicture};
 
-
-    private String[] mActivityList;
-
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-
-    private ListView mDrawerList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,20 +49,19 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
     }
 
     private void initDrawer(){
-        mActivityList = getResources().getStringArray(R.array.activity_list);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mActivityList));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
+        BaseAdapter drawer_adapter = new DrawerAdapter(HistoryListActivity.this);
+
+        View header = getLayoutInflater().inflate(R.layout.drawer_list_header, null);
+        mDrawerList.addHeaderView(header);
+
+        mDrawerList.setAdapter(drawer_adapter);
 
 
         mTitle = mDrawerTitle = getTitle();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.icon, R.string.drawer_open, R.string.drawer_close) {
 
             /** Called when a drawer has settled in a completely closed state. */

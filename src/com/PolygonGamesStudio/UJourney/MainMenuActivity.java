@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.*;
+import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.Adapter.MainMenuAdapter;
+import com.PolygonGamesStudio.UJourney.Adapter.ProfileAdapter;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
 import com.PolygonGamesStudio.UJourney.Service.CategoryService;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
@@ -14,10 +15,8 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 public class MainMenuActivity extends Activity{
-    private String[] mActivityList;
 
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
@@ -29,14 +28,17 @@ public class MainMenuActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
-//
-        mActivityList = getResources().getStringArray(R.array.activity_list);
+
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-//
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mActivityList));
-        // Set the list's click listener
+
+        BaseAdapter drawer_adapter = new DrawerAdapter(MainMenuActivity.this);
+
+        View header = getLayoutInflater().inflate(R.layout.drawer_list_header, null);
+        mDrawerList.addHeaderView(header);
+
+        mDrawerList.setAdapter(drawer_adapter);
+
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
         mTitle = mDrawerTitle = getTitle();
 
@@ -62,6 +64,8 @@ public class MainMenuActivity extends Activity{
 
         ListView lvMainMenu = (ListView) findViewById(R.id.listViewMainMenu);
         MainMenuAdapter adapter = new MainMenuAdapter(MainMenuActivity.this);
+
+
         lvMainMenu.setAdapter(adapter);
 
         lvMainMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -5,6 +5,8 @@
     <!--main_ menu-->
     <color name="divider">#bebebf</color>
     <color name="grey">#bebebf</color>
+    <!--drawer-->
+    <color name="black">#000</color>
 
 
 
