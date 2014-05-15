@@ -37,7 +37,7 @@ public class CategoryService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         // TODO: передавать URL ! Парсер json
 
-        String url = "http://192.168.1.15:5000/api/v1.0/category";
+        String url = "http://go.openrise.org:5000/api/v1.0/category";
         String jsonStr = HttpConnectionHandler.ServiceCall(url, "GET");
 
         String JSON_ROOT = "category";
