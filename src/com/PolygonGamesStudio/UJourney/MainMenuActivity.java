@@ -45,26 +45,23 @@ public class MainMenuActivity extends Activity{
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.icon, R.string.drawer_open, R.string.drawer_close) {
 
-            /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
-            /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
         };
-        // Set the drawer toggle as the DrawerListener
+
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         ListView lvMainMenu = (ListView) findViewById(R.id.listViewMainMenu);
         MainMenuAdapter adapter = new MainMenuAdapter(MainMenuActivity.this);
-
 
         lvMainMenu.setAdapter(adapter);
 
