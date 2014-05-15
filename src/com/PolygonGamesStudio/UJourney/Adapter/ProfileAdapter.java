@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.Holder.ViewHolder;
 import com.PolygonGamesStudio.UJourney.R;
+import com.squareup.picasso.Picasso;
 
 public class ProfileAdapter extends BaseAdapter {
     Context ctx;
