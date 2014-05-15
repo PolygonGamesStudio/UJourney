@@ -12,9 +12,6 @@ import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.squareup.picasso.Transformation;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by user1 on 4/26/14.
- */
 public class JourneySimpleCursorAdapter extends SimpleCursorAdapter{
 
     Context context_instance;

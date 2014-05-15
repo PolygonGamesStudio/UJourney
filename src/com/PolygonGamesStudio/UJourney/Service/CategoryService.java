@@ -66,7 +66,6 @@ public class CategoryService extends IntentService {
                 for (int i = 0; i < category.length(); i++) {
                     JSONObject c = category.getJSONObject(i);
 
-
                     cv.put(CONTACT_ID, c.getString(JSON_ID));
                     cv.put(CONTACT_NAME, c.getString(JSON_TITLE));
                     cv.put(CONTACT_PICTURE, c.getString(JSON_PICTURE));

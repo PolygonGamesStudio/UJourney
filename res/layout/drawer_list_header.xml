@@ -4,12 +4,12 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--TODO: сделать отступ сверху и снизу-->
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/headerImageView"
             android:src="@drawable/avatar_logout"
-            android:layout_marginTop="6dp"
 
             android:layout_alignParentLeft="true"/>
     <TextView
