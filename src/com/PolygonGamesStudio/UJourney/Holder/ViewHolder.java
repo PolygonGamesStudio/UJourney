@@ -7,4 +7,5 @@ public class ViewHolder {
     public TextView text;
     public TextView descriptions;
     public ImageView icon;
+    public ImageView arrow;
 }

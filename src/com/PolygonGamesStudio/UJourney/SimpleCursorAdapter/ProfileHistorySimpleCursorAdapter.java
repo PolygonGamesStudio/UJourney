@@ -7,9 +7,6 @@ import android.widget.SimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by root on 5/16/14.
- */
 public class ProfileHistorySimpleCursorAdapter extends SimpleCursorAdapter {
     Context context_instance;
 

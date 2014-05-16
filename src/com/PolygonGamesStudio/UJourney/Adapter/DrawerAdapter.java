@@ -55,6 +55,7 @@ public class DrawerAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.text = (TextView) convertView.findViewById(R.id.headerTextView);
             holder.icon = (ImageView) convertView.findViewById(R.id.headerImageView);
+            holder.arrow = (ImageView) convertView.findViewById(R.id.drawerArrow);
 
             convertView.setTag(holder);
         }
@@ -64,7 +65,7 @@ public class DrawerAdapter extends BaseAdapter {
 
         holder.text.setText(names[position]);
         holder.icon.setImageResource(icons[position]);
-
+        holder.arrow.setImageResource(R.drawable.btn_arrow_right_normal);
 
         return convertView;
 
