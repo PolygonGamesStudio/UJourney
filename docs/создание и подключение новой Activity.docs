@@ -31,12 +31,11 @@
 -----------------------------------------------------------------------
 В классе новой активити:
   0) добавляем поля:
-        private String[] mActivityList;
-        private DrawerLayout mDrawerLayout;
         private ActionBarDrawerToggle mDrawerToggle;
-        private CharSequence mDrawerTitle;
-        private CharSequence mTitle;
-        private ListView mDrawerList;
+            private CharSequence mDrawerTitle;
+            private CharSequence mTitle;
+
+            private ListView mDrawerList;
 
   1)добавляем метод:
       private void initDrawer(){

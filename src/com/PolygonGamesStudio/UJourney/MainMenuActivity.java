@@ -31,6 +31,34 @@ public class MainMenuActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
 
+        initDrawer();
+
+        ListView lvMainMenu = (ListView) findViewById(R.id.listViewMainMenu);
+        MainMenuAdapter adapter = new MainMenuAdapter(MainMenuActivity.this);
+
+        lvMainMenu.setAdapter(adapter);
+
+        lvMainMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:  // 0 - Случайно
+                        break;
+                    case 1:  // 1 - Категории
+                        Intent service = new Intent(MainMenuActivity.this, CategoryService.class);
+                        startService(service);
+
+                        Intent intent = new Intent(MainMenuActivity.this, CategoryListActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 2:  // 2 - Предложения
+                        break;
+                }
+            }
+        });
+    }
+
+    private void initDrawer(){
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         BaseAdapter drawer_adapter = new DrawerAdapter(MainMenuActivity.this);
@@ -60,30 +88,6 @@ public class MainMenuActivity extends Activity{
         };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        ListView lvMainMenu = (ListView) findViewById(R.id.listViewMainMenu);
-        MainMenuAdapter adapter = new MainMenuAdapter(MainMenuActivity.this);
-
-        lvMainMenu.setAdapter(adapter);
-
-        lvMainMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:  // 0 - Случайно
-                        break;
-                    case 1:  // 1 - Категории
-                        Intent service = new Intent(MainMenuActivity.this, CategoryService.class);
-                        startService(service);
-
-                        Intent intent = new Intent(MainMenuActivity.this, CategoryListActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 2:  // 2 - Предложения
-                        break;
-                }
-            }
-        });
     }
 
 }
