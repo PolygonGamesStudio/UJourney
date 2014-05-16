@@ -39,39 +39,35 @@
 
   1)добавляем метод:
       private void initDrawer(){
-              mActivityList = getResources().getStringArray(R.array.activity_list);
-              mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-              mDrawerList = (ListView) findViewById(R.id.left_drawer);
+              DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+                      mDrawerList = (ListView) findViewById(R.id.left_drawer);
+                      BaseAdapter drawer_adapter = new DrawerAdapter(this);
+                      View header = getLayoutInflater().inflate(R.layout.drawer_list_header, null);
+                      ImageView v = (ImageView) header.findViewById(R.id.headerImageView);
+                      Picasso.with(this).load(R.drawable.avatar_logout).transform(PicassoHelper.getTransform()).into(v);
+                      mDrawerList.addHeaderView(header);
 
-              // Set the adapter for the list view
-              mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                      R.layout.drawer_list_item, mActivityList));
-              // Set the list's click listener
-              mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
+                      mDrawerList.setAdapter(drawer_adapter);
 
+                      mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
+                      mTitle = mDrawerTitle = getTitle();
+                      mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                              R.drawable.icon, R.string.drawer_open, R.string.drawer_close) {
 
-              mTitle = mDrawerTitle = getTitle();
-              mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-              mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                      R.drawable.icon, R.string.drawer_open, R.string.drawer_close) {
+                          public void onDrawerClosed(View view) {
+                              super.onDrawerClosed(view);
+                              getActionBar().setTitle(mTitle);
+                              invalidateOptionsMenu();
+                          }
 
-                  /** Called when a drawer has settled in a completely closed state. */
-                  public void onDrawerClosed(View view) {
-                      super.onDrawerClosed(view);
-                      getActionBar().setTitle(mTitle);
-                      invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-                  }
+                          public void onDrawerOpened(View drawerView) {
+                              super.onDrawerOpened(drawerView);
+                              getActionBar().setTitle(mDrawerTitle);
+                              invalidateOptionsMenu();
+                          }
+                      };
 
-                  /** Called when a drawer has settled in a completely open state. */
-                  public void onDrawerOpened(View drawerView) {
-                      super.onDrawerOpened(drawerView);
-                      getActionBar().setTitle(mDrawerTitle);
-                      invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-                  }
-              };
-
-              // Set the drawer toggle as the DrawerListener
-              mDrawerLayout.setDrawerListener(mDrawerToggle);
+                      mDrawerLayout.setDrawerListener(mDrawerToggle);
       }
   2) в onCreate() вызываем метод:
         initDrawer();

@@ -1,27 +1,35 @@
 package com.PolygonGamesStudio.UJourney;
 
 import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.Adapter.ProfileAdapter;
+import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
+import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
+import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.ProfileHistorySimpleCursorAdapter;
 import com.squareup.picasso.Picasso;
 
-public class ProfileActivity extends Activity {
+public class ProfileActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
     private ListView mDrawerList;
+
+    SimpleCursorAdapter scAdapter;
+    private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
+    private static final int[] viewID =  new  int[]{R.id.textID, R.id.headerTextView, R.id.descriptionTextView, R.id.headerImageView};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,8 @@ public class ProfileActivity extends Activity {
 
         initDrawer();
 
+
+
         Picasso.with(this).load("http://www.kopirkin.com.ua/wp-content/uploads/2014/04/547459_main-300x300.jpg")
                 .transform(PicassoHelper.getTransform())
                 .into((ImageView) findViewById(R.id.PhotoImageView));
@@ -37,7 +47,14 @@ public class ProfileActivity extends Activity {
         ProfileAdapter adapter = new ProfileAdapter(ProfileActivity.this);
         View header = getLayoutInflater().inflate(R.layout.profile_list_header, null);
         lvPlaces.addHeaderView(header);
-        lvPlaces.setAdapter(adapter);
+        //lvPlaces.setAdapter(adapter);
+
+        scAdapter = new ProfileHistorySimpleCursorAdapter(this, R.layout.profile_list_item, null, PROJECTION, viewID, 0);
+        ListView lvData = (ListView) findViewById(R.id.PlacesListView);
+        lvData.setAdapter(scAdapter);
+
+        registerForContextMenu(lvData);
+        getLoaderManager().initLoader(0, null, this);
 
     }
 
@@ -72,4 +89,20 @@ public class ProfileActivity extends Activity {
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(ProfileActivity.this, CacheContentProvider.HISTORY_CONTENT_URI, PROJECTION, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        scAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        scAdapter.swapCursor(null);
+    }
+
 }
