@@ -3,6 +3,7 @@ package com.PolygonGamesStudio.UJourney;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.media.Image;
@@ -16,6 +17,7 @@ import com.PolygonGamesStudio.UJourney.Adapter.ProfileAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
+import com.PolygonGamesStudio.UJourney.Service.HistoryService;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.ProfileHistorySimpleCursorAdapter;
 import com.squareup.picasso.Picasso;
@@ -52,6 +54,9 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
         scAdapter = new ProfileHistorySimpleCursorAdapter(this, R.layout.profile_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.PlacesListView);
         lvData.setAdapter(scAdapter);
+
+        Intent service_history = new Intent(this, HistoryService.class);
+        this.startService(service_history);
 
         registerForContextMenu(lvData);
         getLoaderManager().initLoader(0, null, this);
