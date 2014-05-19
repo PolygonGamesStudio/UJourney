@@ -33,5 +33,15 @@ public class LogInActivity extends Activity {
             public void onClick(View v) {
             }
         });
+
+        Button signGoogleButton = (Button) findViewById(R.id.signGoogle);
+        signGoogleButton.setOnClickListener(new  View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(LogInActivity.this, MainMenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }
