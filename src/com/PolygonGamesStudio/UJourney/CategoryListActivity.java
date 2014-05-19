@@ -7,6 +7,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
@@ -51,5 +52,10 @@ public class CategoryListActivity extends Activity implements LoaderManager.Load
         scAdapter.swapCursor(null);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
+    }
 }
 

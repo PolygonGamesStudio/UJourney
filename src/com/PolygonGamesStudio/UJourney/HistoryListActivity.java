@@ -3,12 +3,14 @@ package com.PolygonGamesStudio.UJourney;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -35,7 +37,9 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         setContentView(R.layout.history_list);
 
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         scAdapter = new JourneySimpleCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.lvData);
@@ -98,4 +102,9 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         scAdapter.swapCursor(null);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
+    }
 }
