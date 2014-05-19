@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headerImageView"
+            android:src="@drawable/ic_launcher"
+
+            android:layout_alignParentLeft="true"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Название"
+            android:id="@+id/headerTextView"
+
+            android:layout_marginLeft="12dp"
+            android:textColor="@android:color/black"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/headerImageView"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Время последнего визита"
+            android:id="@+id/descriptionTextView"
+
+
+            android:textColor="@android:color/darker_gray"
+            android:layout_below="@+id/headerTextView"
+            android:layout_alignLeft="@+id/headerTextView"
+            android:layout_marginBottom="12dp"/>
+</RelativeLayout>

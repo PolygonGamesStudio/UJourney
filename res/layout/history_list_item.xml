@@ -25,6 +25,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Заголовок"
             android:id="@+id/textTitle"
+            android:textSize="24dp"
 
             android:layout_toRightOf="@+id/textPicture"/>
     <TextView
@@ -33,6 +34,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Дата визита"
             android:id="@+id/textVisit"
+            android:textSize="16dp"
 
             android:layout_below="@+id/textTitle"
             android:layout_toRightOf="@+id/textPicture"/>

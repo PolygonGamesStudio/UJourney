@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.PolygonGamesStudio.UJourney.HistoryListActivity;
 import com.PolygonGamesStudio.UJourney.LogInActivity;
+import com.PolygonGamesStudio.UJourney.PlaceActivity;
 import com.PolygonGamesStudio.UJourney.ProfileActivity;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
 
@@ -32,11 +33,19 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         }
 
         if (position == 1){  // 1 - История
-            Intent service_history = new Intent(parentActivity, HistoryService.class);
-            parentActivity.startService(service_history);
+            Intent history_service = new Intent(parentActivity, HistoryService.class);
+            parentActivity.startService(history_service);
 
-            Intent intent_history = new Intent(parentActivity, HistoryListActivity.class);
-            parentActivity.startActivity(intent_history);
+            Intent history_intent = new Intent(parentActivity, HistoryListActivity.class);
+            parentActivity.startActivity(history_intent);
+        }
+
+        if (position == 2){  // 2 - Избранное
+            Intent history_service = new Intent(parentActivity, HistoryService.class);
+            parentActivity.startService(history_service);
+
+            Intent place_intent = new Intent(parentActivity, PlaceActivity.class);
+            parentActivity.startActivity(place_intent);
         }
 
         if (position == 4){  //  4 - выход
