@@ -47,7 +47,6 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
         ProfileAdapter adapter = new ProfileAdapter(ProfileActivity.this);
         View header = getLayoutInflater().inflate(R.layout.profile_list_header, null);
         lvPlaces.addHeaderView(header);
-        //lvPlaces.setAdapter(adapter);
 
         scAdapter = new ProfileHistorySimpleCursorAdapter(this, R.layout.profile_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.PlacesListView);
@@ -58,7 +57,6 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
         registerForContextMenu(lvData);
         getLoaderManager().initLoader(0, null, this);
-
     }
 
     private void initDrawer(){
