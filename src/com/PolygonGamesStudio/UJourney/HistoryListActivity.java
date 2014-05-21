@@ -9,19 +9,25 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
+import com.PolygonGamesStudio.UJourney.View.SwipeListView;
+
+import java.util.Arrays;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
+    final String LOG_TAG = "myLogs";
+
     SimpleCursorAdapter scAdapter;
+    ListView lvData;
+    SwipeListView swipeListView;
 
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
     private static final int[] viewID =  new  int[]{R.id.textID, R.id.textTitle, R.id.textVisit, R.id.textPicture};
@@ -34,11 +40,14 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_list);
 
+        // TODO: make back action in ActionBar
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         scAdapter = new JourneySimpleCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
-        ListView lvData = (ListView) findViewById(R.id.lvData);
+        lvData = (ListView) findViewById(R.id.lvData);
+//        swipeListView = (SwipeListView) findViewById(R.id.lvData);
+        lvData.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         lvData.setAdapter(scAdapter);
 
         initDrawer();
