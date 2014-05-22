@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+    <LinearLayout
+            android:id="@+id/back"
+            style="@style/ListBackContent">
+        <Button
+                android:id="@+id/btnDecline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ListButtonAction"
+                android:text="Decline"
+                android:visibility="invisible"/>
+        <ImageButton
+                android:id="@+id/btnAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ListButtonAction"
+                android:text="Accept"
+                android:src="@drawable/trash_recyclebin_empty_closed"
+                android:background="@color/white"/>
+    </LinearLayout>
+    <RelativeLayout
+            android:id="@+id/front"
+            android:orientation="vertical"
+            style="@style/ListFrontContent">
+        <ImageView
+                android:id="@+id/histElPicture"
+                android:src="@drawable/icon"
+                style="@style/HistoryListImage"/>
+        <TextView
+                android:id="@+id/histElId"
+                android:text="ID"
+                style="@style/HistoryListId"/>
+        <TextView
+                android:id="@+id/histElTitle"
+                android:text="Заголовок"
+                android:layout_toRightOf="@+id/histElPicture"
+                style="@style/HistoryListTitle"/>
+        <TextView
+                android:id="@+id/histElVisitTime"
+                android:text="Дата визита"
+                android:layout_below="@+id/histElTitle"
+                android:layout_toRightOf="@+id/histElPicture"
+                style="@style/HistoryListTitle"/>
+    </RelativeLayout>
+</FrameLayout>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content" android:padding="12dp">
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textPicture"
-
-            android:layout_marginRight="12dp"
-            android:src="@drawable/icon"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="ID"
-            android:id="@+id/textID"
-
-            android:textColor="@color/white" android:visibility="invisible"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Заголовок"
-            android:id="@+id/textTitle"
-            android:textSize="24dp"
-
-            android:layout_toRightOf="@+id/textPicture"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Дата визита"
-            android:id="@+id/textVisit"
-            android:textSize="16dp"
-
-            android:layout_below="@+id/textTitle"
-            android:layout_toRightOf="@+id/textPicture"/>
-</RelativeLayout>

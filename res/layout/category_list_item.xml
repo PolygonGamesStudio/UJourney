@@ -5,7 +5,7 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textPicture"
+            android:id="@+id/histElPicture"
 
             android:layout_marginRight="12dp"
             android:src="@drawable/icon"/>
@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="ID"
-            android:id="@+id/textID"
+            android:id="@+id/histElId"
 
             android:textColor="@color/white" android:visibility="invisible"/>
     <TextView
@@ -22,13 +22,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Заголовок"
-            android:id="@+id/textTitle"
+            android:id="@+id/histElTitle"
 
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textPicture"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/btn_arrow_right_black_normal"
-            android:layout_alignParentRight="true"/>
+            android:layout_toRightOf="@+id/histElPicture"/>
 </RelativeLayout>

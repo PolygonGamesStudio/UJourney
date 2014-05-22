@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
@@ -30,7 +31,7 @@ public class CategoryListActivity extends Activity implements LoaderManager.Load
     SimpleCursorAdapter scAdapter;
 
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "picture"};
-    private static final int[] viewID =  new  int[]{R.id.textID, R.id.textTitle, R.id.textPicture};
+    private static final int[] viewID =  new  int[]{R.id.histElId, R.id.histElTitle, R.id.histElPicture};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,11 @@ public class CategoryListActivity extends Activity implements LoaderManager.Load
         scAdapter.swapCursor(null);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
+    }
     private void initDrawer(){
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);

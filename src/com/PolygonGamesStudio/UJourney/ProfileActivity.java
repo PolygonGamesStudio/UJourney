@@ -1,15 +1,16 @@
 package com.PolygonGamesStudio.UJourney;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
@@ -18,7 +19,6 @@ import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
-import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.ProfileHistorySimpleCursorAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +31,7 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
     SimpleCursorAdapter scAdapter;
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
-    private static final int[] viewID =  new  int[]{R.id.textID, R.id.headerTextView, R.id.descriptionTextView, R.id.headerImageView};
+    private static final int[] viewID =  new  int[]{R.id.histElId, R.id.headerTextView, R.id.descriptionTextView, R.id.headerImageView};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,10 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
         initDrawer();
 
-
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Picasso.with(this).load("http://cdn2-b.examiner.com/sites/default/files/styles/square_thumb_medium/hash/8a/36/8a36a57dbcfd3ee1cb846b9bf986999e.jpg?itok=Dl1tKkiR")
                 .transform(PicassoHelper.getTransform())
@@ -49,7 +52,6 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
         //ProfileAdapter adapter = new ProfileAdapter(ProfileActivity.this);
         View header = getLayoutInflater().inflate(R.layout.profile_list_header, null);
         lvPlaces.addHeaderView(header);
-        //lvPlaces.setAdapter(adapter);
 
         scAdapter = new ProfileHistorySimpleCursorAdapter(this, R.layout.profile_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.PlacesListView);
@@ -60,7 +62,6 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
         registerForContextMenu(lvData);
         getLoaderManager().initLoader(0, null, this);
-
     }
 
     private void initDrawer(){
@@ -110,4 +111,9 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
         scAdapter.swapCursor(null);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
+    }
 }
