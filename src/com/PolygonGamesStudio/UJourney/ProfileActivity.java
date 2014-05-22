@@ -1,5 +1,6 @@
 package com.PolygonGamesStudio.UJourney;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -9,6 +10,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
@@ -38,7 +40,10 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
         initDrawer();
 
-
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Picasso.with(this).load("http://www.kopirkin.com.ua/wp-content/uploads/2014/04/547459_main-300x300.jpg")
                 .transform(PicassoHelper.getTransform())
@@ -106,4 +111,9 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
         scAdapter.swapCursor(null);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
+    }
 }
