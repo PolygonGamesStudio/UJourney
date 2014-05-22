@@ -1,0 +1,66 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_black"
+                android:tileMode="repeat">
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:id="@+id/route_header">
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:inputType="time"
+                android:ems="14"
+                android:id="@+id/route_time_input"
+
+                android:textColor="@color/black"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="38dp"
+                android:background="@color/white"/>
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:inputType="number"
+                android:ems="20"
+                android:id="@+id/route_money_input"
+
+                android:textColor="@color/black"
+                android:layout_below="@id/route_time_input"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/start_journey"
+                android:id="@+id/start_journey"
+
+                android:layout_below="@id/route_money_input"
+                android:textColor="@android:color/black"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"/>
+    </RelativeLayout>
+
+    <ListView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/route_nodes_ListView"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+
+              android:layout_marginTop="24dp"
+              android:divider="@color/divider"
+              android:background="@color/white"
+              android:dividerHeight="1dp"
+              android:layout_below="@id/route_header"
+
+              android:padding="4dp"
+              android:footerDividersEnabled="false"
+              android:headerDividersEnabled="false">
+    </ListView>
+</RelativeLayout>
+

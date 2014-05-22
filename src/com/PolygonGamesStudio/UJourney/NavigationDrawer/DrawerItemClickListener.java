@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.PolygonGamesStudio.UJourney.HistoryListActivity;
-import com.PolygonGamesStudio.UJourney.LogInActivity;
-import com.PolygonGamesStudio.UJourney.ProfileActivity;
+import com.PolygonGamesStudio.UJourney.*;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
+import com.PolygonGamesStudio.UJourney.Service.RouteService;
 
 
 public class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -32,11 +31,27 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         }
 
         if (position == 1){  // 1 - История
-            Intent service_history = new Intent(parentActivity, HistoryService.class);
-            parentActivity.startService(service_history);
+            Intent history_service = new Intent(parentActivity, HistoryService.class);
+            parentActivity.startService(history_service);
 
-            Intent intent_history = new Intent(parentActivity, HistoryListActivity.class);
-            parentActivity.startActivity(intent_history);
+            Intent history_intent = new Intent(parentActivity, HistoryListActivity.class);
+            parentActivity.startActivity(history_intent);
+        }
+
+        if (position == 2){  // 2 - Избранное
+            Intent history_service = new Intent(parentActivity, HistoryService.class);
+            parentActivity.startService(history_service);
+
+            Intent place_intent = new Intent(parentActivity, PlaceActivity.class);
+            parentActivity.startActivity(place_intent);
+        }
+
+        if (position == 3){  // 3 - Настройки
+            Intent route_service = new Intent(parentActivity, RouteService.class);
+            parentActivity.startService(route_service);
+
+            Intent route_intent = new Intent(parentActivity, RouteActivity.class);
+            parentActivity.startActivity(route_intent);
         }
 
         if (position == 4){  //  4 - выход

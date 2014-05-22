@@ -9,53 +9,68 @@
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/background_black"
-                        android:tileMode="repeat">
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/PhotoImageView"
+                        android:id="@+id/place_relative_layout">
 
-                    android:src="@drawable/man_5_300x300"
+            <ImageView
+                    android:id="@+id/place_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="205dp"
+                    android:src="@drawable/starbucks_background"
+                    android:layout_alignParentTop="true"/>
+
+            <ImageView
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:id="@+id/place_logo"
+
+                    android:src="@drawable/starbucks_logo"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"/>
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Виталий"
+                    android:id="@+id/place_name"
+                    android:text="Старбакс"
                     android:textColor="@color/white"
                     android:textSize="24dp"
-
-                    android:layout_marginTop="12dp"
-                    android:id="@+id/NameTextView"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/PhotoImageView"/>
+                    android:layout_marginTop="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/place_logo"/>
             <TextView
+                    android:id="@+id/place_address"
+                    android:text="Ул. Бауманская, д. 40"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Бруталович"
-                    android:textColor="@color/white"
-                    android:textSize="24dp"
-
-                    android:id="@+id/LastNameTextView"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/NameTextView"/>
+                    android:layout_below="@id/place_name"/>
+            <include
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/place_rating"
+                    android:id="@+id/place_rating"
+                    android:visibility="visible"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/place_background" />
 
             <ListView android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:id="@+id/PlacesListView"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/place_history_ListView"
 
-                      android:layout_marginTop="12dp"
+                      android:layout_marginTop="24dp"
                       android:divider="@color/divider"
                       android:background="@color/white"
                       android:dividerHeight="1dp"
-                      android:layout_below="@id/LastNameTextView"
+                      android:layout_below="@id/place_rating"
 
                       android:padding="4dp"
                       android:footerDividersEnabled="false"
@@ -63,6 +78,7 @@
             </ListView>
         </RelativeLayout>
     </FrameLayout>
+
     <!-- The navigation drawer -->
     <ListView android:id="@+id/left_drawer"
               android:layout_width="240dp"
@@ -73,4 +89,3 @@
               android:dividerHeight="1dp"
               android:background="#202024"/>
 </android.support.v4.widget.DrawerLayout>
-

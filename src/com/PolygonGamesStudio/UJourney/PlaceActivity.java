@@ -1,25 +1,18 @@
 package com.PolygonGamesStudio.UJourney;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.media.Image;
+import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
-import com.PolygonGamesStudio.UJourney.Adapter.ProfileAdapter;
-import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
-import com.squareup.picasso.Picasso;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
@@ -27,7 +20,7 @@ import com.PolygonGamesStudio.UJourney.Service.HistoryService;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.ProfileHistorySimpleCursorAdapter;
 import com.squareup.picasso.Picasso;
 
-public class ProfileActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class PlaceActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -36,31 +29,29 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
     SimpleCursorAdapter scAdapter;
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
-    private static final int[] viewID =  new  int[]{R.id.histElId, R.id.headerTextView, R.id.descriptionTextView, R.id.headerImageView};
+    private static final int[] viewID =  new  int[]{R.id.textID, R.id.headerTextView, R.id.descriptionTextView, R.id.headerImageView};
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile);
+        setContentView(R.layout.place);
 
         initDrawer();
 
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+//        ImageView imageView = (ImageView)findViewById(R.id.place_background);
+//        imageView.setColorFilter(202024);
 
-        Picasso.with(this).load("http://cdn2-b.examiner.com/sites/default/files/styles/square_thumb_medium/hash/8a/36/8a36a57dbcfd3ee1cb846b9bf986999e.jpg?itok=Dl1tKkiR")
+        Picasso.with(this).load(R.drawable.starbucks_logo)
                 .transform(PicassoHelper.getTransform())
-                .into((ImageView) findViewById(R.id.PhotoImageView));
-        ListView lvPlaces = (ListView) findViewById(R.id.PlacesListView);
-        //ProfileAdapter adapter = new ProfileAdapter(ProfileActivity.this);
-        View header = getLayoutInflater().inflate(R.layout.profile_list_header, null);
-        lvPlaces.addHeaderView(header);
-        lvPlaces.setAdapter(adapter);
+                .into((ImageView) findViewById(R.id.place_logo));
 
-        scAdapter = new ProfileHistorySimpleCursorAdapter(this, R.layout.profile_list_item, null, PROJECTION, viewID, 0);
-        ListView lvData = (ListView) findViewById(R.id.PlacesListView);
+
+        ListView lvPlaces = (ListView) findViewById(R.id.place_history_ListView);
+        View header = getLayoutInflater().inflate(R.layout.built_in_history_list_header, null);
+        lvPlaces.addHeaderView(header);
+
+        scAdapter = new ProfileHistorySimpleCursorAdapter(this, R.layout.built_in_history_list_item, null, PROJECTION, viewID, 0);
+        ListView lvData = (ListView) findViewById(R.id.place_history_ListView);
         lvData.setAdapter(scAdapter);
 
         Intent service_history = new Intent(this, HistoryService.class);
@@ -68,6 +59,22 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
         registerForContextMenu(lvData);
         getLoaderManager().initLoader(0, null, this);
+
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(PlaceActivity.this, CacheContentProvider.HISTORY_CONTENT_URI, PROJECTION, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        scAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        scAdapter.swapCursor(null);
     }
 
     private void initDrawer(){
@@ -100,26 +107,5 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
         };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(ProfileActivity.this, CacheContentProvider.HISTORY_CONTENT_URI, PROJECTION, null, null, null);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        scAdapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        scAdapter.swapCursor(null);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        this.finish();
-        return super.onOptionsItemSelected(item);
     }
 }

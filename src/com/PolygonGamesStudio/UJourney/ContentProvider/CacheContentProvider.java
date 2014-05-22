@@ -6,35 +6,80 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.text.TextUtils;
 
 public class CacheContentProvider extends ContentProvider {
 
     public static final String DB_NAME = "mydb";
     public static final int DB_VERSION = 1;
-    public static final String HISTORY_ID = "id";
-    public static final String AUTHORITY = "cache";
-    public static final String HISTORY_PATH = "history";
-    public static final Uri HISTORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + HISTORY_PATH);
-    public static final String CATEGORY_PATH = "category";
-    public static final Uri CATEGORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + CATEGORY_PATH);
     public static final String USER_PATH = "user";
-    public static final Uri USER_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
     static final String HISTORY_TABLE = "history";
     static final String CATEGORY_TABLE = "category";
     static final String USER_TABLE = "user";
+    static final String ROUTE_TABLE = "route";
+    static final String NODE_TABLE = "node";
+    public static final String AUTHORITY = "cache";
+    public static final Uri USER_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
+
+
+
     static final String HISTORY_ID_ANDROID = "_id";
+    static final String HISTORY_ID = "id";
     static final String HISTORY_TITLE = "title";
     static final String HISTORY_VISIT = "visit";
     static final String HISTORY_PICTURE = "picture";
+
+    static final String ROUTE_ID_ANDROID = "_id";
+    static final String ROUTE_ID = "id";
+    static final String ROUTE_PLACE_NAME = "place_name";
+    static final String ROUTE_ADDRESS = "address";
+    static final String ROUTE_TIP = "tip";
+
+    static final String NODE_ID_ANDROID = "_id";
+    static final String NODE_ROUTE_ID = "route_id";
+    static final String NODE_ID = "id";
+    static final String NODE_TEXT = "text";
+    static final String NODE_GEO = "geo";
+
     static final String DB_CREATE_HISTORY = "create table " + HISTORY_TABLE + " ("
-            + HISTORY_ID_ANDROID + " integer primary key autoincrement, " +
-            HISTORY_ID + " integer unique, " +
-            HISTORY_TITLE + " text, " +
-            HISTORY_PICTURE + " text, " +
-            HISTORY_VISIT + " text);";
+            + HISTORY_ID_ANDROID + " integer primary key autoincrement, "
+            + HISTORY_ID + " integer unique, "
+            + HISTORY_TITLE + " text, "
+            + HISTORY_PICTURE + " text, "
+            + HISTORY_VISIT + " text" + ");";
+
     static final String DB_CREATE_CATEGORY = "create table " + CATEGORY_TABLE + " ("
             + HISTORY_ID_ANDROID + " integer primary key autoincrement, "
-            + HISTORY_ID + " integer unique, " + HISTORY_TITLE + " text, " + HISTORY_PICTURE + " text);";
+            + HISTORY_ID + " integer unique, "
+            + HISTORY_TITLE + " text, "
+            + HISTORY_PICTURE + " text);";
+
+    static final String DB_CREATE_ROUTE = "create table " + ROUTE_TABLE + " ("
+            + ROUTE_ID_ANDROID + " integer primary key autoincrement, "
+            + ROUTE_ID + " integer unique, "
+            + ROUTE_PLACE_NAME + " text, "
+            + ROUTE_ADDRESS + " text, "
+            + ROUTE_TIP + " text);";
+
+    static final String DB_CREATE_NODE = "create table " + NODE_TABLE + " ("
+            + NODE_ID_ANDROID + " integer primary key autoincrement, "
+            + NODE_ROUTE_ID + " integer, "
+            + NODE_ID + " integer unique, "
+            + NODE_TEXT + " text, "
+            + NODE_GEO + " text);";
+
+
+    public static final String HISTORY_PATH = "history";
+    public static final String CATEGORY_PATH = "category";
+    public static final String ROUTE_PATH = "route";
+    public static final String NODE_PATH = "node";
+
+    public static final Uri HISTORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + HISTORY_PATH);
+    public static final Uri CATEGORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + CATEGORY_PATH);
+    public static final Uri ROUTE_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + ROUTE_PATH);
+    public static final Uri NODE_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + NODE_PATH);
+
+
     static final String USER_ID = "id";
     static final String USER_NAME = "name";
     static final String LASTUSER_NAME = "lastname";
@@ -47,13 +92,17 @@ public class CacheContentProvider extends ContentProvider {
             + USER_PICTURE + " text);";
     static final int URI_HISTORY = 1;
     static final int URI_CATEGORY = 2;
-    static final int URI_USER = 3;
+    static final int URI_ROUTE = 3;
+    static final int URI_NODE = 4;
+    static final int URI_USER = 5;
 
     private static final UriMatcher uriMatcher;
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(AUTHORITY, HISTORY_PATH, URI_HISTORY);
         uriMatcher.addURI(AUTHORITY, CATEGORY_PATH, URI_CATEGORY);
+        uriMatcher.addURI(AUTHORITY, ROUTE_PATH, URI_ROUTE);
+        uriMatcher.addURI(AUTHORITY, NODE_PATH, URI_NODE);
         uriMatcher.addURI(AUTHORITY, USER_PATH, URI_USER);
     }
     public Uri dbHelperUri;
@@ -83,6 +132,14 @@ public class CacheContentProvider extends ContentProvider {
                 Cursor cursorUser = db.query(USER_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
                 cursorUser.setNotificationUri(getContext().getContentResolver(), USER_CONTENT_URI);
                 return cursorUser;
+            case URI_ROUTE:
+                Cursor cursorRoute = db.query(ROUTE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+                cursorRoute.setNotificationUri(getContext().getContentResolver(), ROUTE_CONTENT_URI);
+                return cursorRoute;
+            case URI_NODE:
+                Cursor cursorNode = db.query(NODE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+                cursorNode.setNotificationUri(getContext().getContentResolver(), NODE_CONTENT_URI);
+                return cursorNode;
             default:
                 throw new IllegalArgumentException("Wrong URI: " + uri);
         }
@@ -92,6 +149,8 @@ public class CacheContentProvider extends ContentProvider {
         db = dbHelper.getWritableDatabase();
         switch (uriMatcher.match(uri)) {
             case URI_HISTORY:
+                db = dbHelper.getWritableDatabase();
+                // TODO: android.database.sqlite.SQLiteConstraintException схватить ошибку, что-бы не срала в логи
                 // TODO: перезаписывать при повторе
                 try {
                     long rowHistoryID = db.insert(HISTORY_TABLE, null, values);
@@ -119,6 +178,17 @@ public class CacheContentProvider extends ContentProvider {
                 } catch (SQLiteConstraintException e) {
                     return null;
                 }
+                // TODO: android.database.sqlite.SQLiteConstraintException схватить ошибку, что-бы не срала в логи
+            case URI_ROUTE:
+                long rowRouteID = db.insert(ROUTE_TABLE, null, values);
+                Uri resultRouteUri = ContentUris.withAppendedId(ROUTE_CONTENT_URI, rowRouteID);
+                getContext().getContentResolver().notifyChange(resultRouteUri, null);
+                return resultRouteUri;
+            case URI_NODE:
+                long rowNodeID = db.insert(NODE_TABLE, null, values);
+                Uri resultNodeUri = ContentUris.withAppendedId(NODE_CONTENT_URI, rowNodeID);
+                getContext().getContentResolver().notifyChange(resultNodeUri, null);
+                return resultNodeUri;
             default:
                 throw new IllegalArgumentException("Wrong URI: " + uri);
         }
@@ -166,9 +236,10 @@ public class CacheContentProvider extends ContentProvider {
         }
 
         public void onCreate(SQLiteDatabase db) {
-//          TODO: перепиши меня!
             db.execSQL(DB_CREATE_HISTORY);
             db.execSQL(DB_CREATE_CATEGORY);
+            db.execSQL(DB_CREATE_ROUTE);
+            db.execSQL(DB_CREATE_NODE);
             db.execSQL(DB_CREATE_USER);
         }
 

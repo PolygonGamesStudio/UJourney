@@ -36,12 +36,24 @@
         <activity android:name=".ProfileActivity"
                   android:screenOrientation="portrait">
         </activity>
+
         <activity android:name=".CategoryListActivity"
                   android:screenOrientation="portrait">
         </activity>
+
+        <activity android:name=".PlaceActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".RouteActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+
         <!--SERVICE-->
         <service android:name=".Service.HistoryService" />
         <service android:name=".Service.CategoryService" />
+        <service android:name=".Service.RouteService" />
+
         <!--PROVIDER-->
         <provider android:name=".ContentProvider.CacheContentProvider"
                   android:authorities="cache">
