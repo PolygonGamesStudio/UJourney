@@ -12,19 +12,15 @@ public class CacheContentProvider extends ContentProvider {
 
     public static final String DB_NAME = "mydb";
     public static final int DB_VERSION = 1;
-    public static final String HISTORY_ID = "id";
-    public static final String AUTHORITY = "cache";
-    public static final String HISTORY_PATH = "history";
-    public static final Uri HISTORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + HISTORY_PATH);
-    public static final String CATEGORY_PATH = "category";
-    public static final Uri CATEGORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + CATEGORY_PATH);
     public static final String USER_PATH = "user";
-    public static final Uri USER_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
     static final String HISTORY_TABLE = "history";
     static final String CATEGORY_TABLE = "category";
     static final String USER_TABLE = "user";
     static final String ROUTE_TABLE = "route";
     static final String NODE_TABLE = "node";
+    public static final String AUTHORITY = "cache";
+    public static final Uri USER_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
+
 
 
     static final String HISTORY_ID_ANDROID = "_id";
@@ -72,7 +68,6 @@ public class CacheContentProvider extends ContentProvider {
             + NODE_TEXT + " text, "
             + NODE_GEO + " text);";
 
-    public static final String AUTHORITY = "cache";
 
     public static final String HISTORY_PATH = "history";
     public static final String CATEGORY_PATH = "category";

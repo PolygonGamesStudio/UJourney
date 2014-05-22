@@ -35,4 +35,8 @@
             android:layout_below="@+id/headerTextView"
             android:layout_alignLeft="@+id/headerTextView"
             android:layout_marginBottom="12dp"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/textID"/>
 </RelativeLayout>
