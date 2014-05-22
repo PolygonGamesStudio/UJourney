@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.R;
 import com.squareup.picasso.Picasso;
@@ -31,23 +32,26 @@ public class HistoryListCursorAdapter extends SimpleCursorAdapter{
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         super.bindView(view, context, cursor);  // FIXME: possible here
 
 //        PROJECTION =  {"_id", "title", "visit", "picture"}
 
-        HistoryHolder holder = (HistoryHolder) view.getTag();
+        final HistoryHolder holder = (HistoryHolder) view.getTag();
 
         holder.btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Accept initiated", Toast.LENGTH_SHORT).show();
+                String historyItemId = holder.id.getText().toString();
+                Toast.makeText(mContext, "Accept initiated. HistItem: " + historyItemId, Toast.LENGTH_SHORT).show();
+                context.getContentResolver().delete(CacheContentProvider.HISTORY_CONTENT_URI, "_id =" + historyItemId, null);
             }
         });
         holder.btnDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Decline initiated", Toast.LENGTH_SHORT).show();
+                String historyItemId = holder.id.getText().toString();
+                Toast.makeText(mContext, "Decline initiated. From: " + historyItemId, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -65,7 +69,7 @@ public class HistoryListCursorAdapter extends SimpleCursorAdapter{
         ImageView image;
         TextView title;
         TextView visitDate;
-        Button btnAccept;
+        ImageButton btnAccept;
         Button btnDecline;
 
         private HistoryHolder(View v) {
@@ -73,7 +77,7 @@ public class HistoryListCursorAdapter extends SimpleCursorAdapter{
             this.image = (ImageView)v.findViewById(R.id.histElPicture);
             this.title = (TextView)v.findViewById(R.id.histElTitle);
             this.visitDate = (TextView)v.findViewById(R.id.histElVisitTime);
-            this.btnAccept = (Button)v.findViewById(R.id.btnAccept);
+            this.btnAccept = (ImageButton)v.findViewById(R.id.btnAccept);
             this.btnDecline = (Button)v.findViewById(R.id.btnDecline);
         }
     }

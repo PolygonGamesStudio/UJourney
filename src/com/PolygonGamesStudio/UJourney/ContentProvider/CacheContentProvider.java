@@ -1,10 +1,6 @@
 package com.PolygonGamesStudio.UJourney.ContentProvider;
 
-import android.content.ContentProvider;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.UriMatcher;
+import android.content.*;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,52 +11,40 @@ public class CacheContentProvider extends ContentProvider {
 
     public static final String DB_NAME = "mydb";
     public static final int DB_VERSION = 1;
-
+    public static final String HISTORY_ID = "id";
+    public static final String AUTHORITY = "cache";
+    public static final String HISTORY_PATH = "history";
+    public static final Uri HISTORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + HISTORY_PATH);
+    public static final String CATEGORY_PATH = "category";
+    public static final Uri CATEGORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + CATEGORY_PATH);
+    public static final String USER_PATH = "user";
+    public static final Uri USER_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
     static final String HISTORY_TABLE = "history";
     static final String CATEGORY_TABLE = "category";
     static final String USER_TABLE = "user";
-
     static final String HISTORY_ID_ANDROID = "_id";
-    static final String HISTORY_ID = "id";
     static final String HISTORY_TITLE = "title";
     static final String HISTORY_VISIT = "visit";
     static final String HISTORY_PICTURE = "picture";
-
-    static final String USER_ID = "id";
-    static final String USER_NAME = "name";
-    static final String LASTUSER_NAME = "lastname";
-    static final String USER_PICTURE = "picture";
-
-
-
     static final String DB_CREATE_HISTORY = "create table " + HISTORY_TABLE + " ("
             + HISTORY_ID_ANDROID + " integer primary key autoincrement, " +
             HISTORY_ID + " integer unique, " +
             HISTORY_TITLE + " text, " +
             HISTORY_PICTURE + " text, " +
             HISTORY_VISIT + " text);";
-
     static final String DB_CREATE_CATEGORY = "create table " + CATEGORY_TABLE + " ("
             + HISTORY_ID_ANDROID + " integer primary key autoincrement, "
             + HISTORY_ID + " integer unique, " + HISTORY_TITLE + " text, " + HISTORY_PICTURE + " text);";
-
+    static final String USER_ID = "id";
+    static final String USER_NAME = "name";
+    static final String LASTUSER_NAME = "lastname";
+    static final String USER_PICTURE = "picture";
     static final String DB_CREATE_USER = "create table " + USER_TABLE + " ("
             + HISTORY_ID_ANDROID + " integer primary key autoincrement, "
             + USER_ID + " integer unique, "
             + USER_NAME + " text, "
             + LASTUSER_NAME + " text, "
             + USER_PICTURE + " text);";
-
-    public static final String AUTHORITY = "cache";
-
-    public static final String HISTORY_PATH = "history";
-    public static final String CATEGORY_PATH = "category";
-    public static final String USER_PATH = "user";
-
-    public static final Uri HISTORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + HISTORY_PATH);
-    public static final Uri CATEGORY_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + CATEGORY_PATH);
-    public static final Uri USER_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
-
     static final int URI_HISTORY = 1;
     static final int URI_CATEGORY = 2;
     static final int URI_USER = 3;
@@ -72,10 +56,8 @@ public class CacheContentProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, CATEGORY_PATH, URI_CATEGORY);
         uriMatcher.addURI(AUTHORITY, USER_PATH, URI_USER);
     }
-
-    DBHelper dbHelper;
     public Uri dbHelperUri;
-
+    DBHelper dbHelper;
     SQLiteDatabase db;
 
     public boolean onCreate() {
@@ -107,9 +89,9 @@ public class CacheContentProvider extends ContentProvider {
     }
 
     public Uri insert(Uri uri, ContentValues values) {
+        db = dbHelper.getWritableDatabase();
         switch (uriMatcher.match(uri)) {
             case URI_HISTORY:
-                db = dbHelper.getWritableDatabase();
                 // TODO: перезаписывать при повторе
                 try {
                     long rowHistoryID = db.insert(HISTORY_TABLE, null, values);
@@ -119,11 +101,8 @@ public class CacheContentProvider extends ContentProvider {
                 } catch (SQLiteConstraintException e) {
                     return null;
                 }
-
-
             case URI_CATEGORY:
                 try {
-                    db = dbHelper.getWritableDatabase();
                     long rowCategoryID = db.insert(CATEGORY_TABLE, null, values);
                     Uri resultCategoryUri = ContentUris.withAppendedId(CATEGORY_CONTENT_URI, rowCategoryID);
                     getContext().getContentResolver().notifyChange(resultCategoryUri, null);
@@ -133,7 +112,6 @@ public class CacheContentProvider extends ContentProvider {
                 }
             case URI_USER:
                 try {
-                    db = dbHelper.getWritableDatabase();
                     long rowUserID = db.insert(USER_TABLE, null, values);
                     Uri resultUserUri = ContentUris.withAppendedId(CATEGORY_CONTENT_URI, rowUserID);
                     getContext().getContentResolver().notifyChange(resultUserUri, null);
@@ -147,16 +125,26 @@ public class CacheContentProvider extends ContentProvider {
     }
 
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        db = dbHelper.getWritableDatabase();
         switch (uriMatcher.match(uri)) {
             case URI_USER:
                 try {
-                    db = dbHelper.getWritableDatabase();
                     long rowUserID = db.delete(USER_TABLE, selection, selectionArgs);
                     Uri resultUserUri = ContentUris.withAppendedId(USER_CONTENT_URI, rowUserID);
                     getContext().getContentResolver().notifyChange(resultUserUri, null);
                     return 1;
                 } catch (SQLiteConstraintException e) {
+                    return 0;
+                }
+            case URI_HISTORY:
+                try {
+                    long rowHistoryId = db.delete(HISTORY_TABLE, selection, selectionArgs);
+                    Uri resultHistoryUri = ContentUris.withAppendedId(HISTORY_CONTENT_URI, rowHistoryId);
+                    getContext().getContentResolver().notifyChange(resultHistoryUri, null);
                     return 1;
+                }
+                catch (SQLiteConstraintException e) {
+                    return 0;
                 }
             default:
                 throw new IllegalArgumentException("Wrong URI: " + uri);
