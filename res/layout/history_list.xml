@@ -48,12 +48,12 @@
                     swipe:swipeDrawableChecked="@drawable/choice_selected"
                     swipe:swipeDrawableUnchecked="@drawable/choice_unselected"
                     swipe:swipeCloseAllItemsWhenMoveList="true"
-                    swipe:swipeMode="both"/>
+                    swipe:swipeMode="left"/>
         </LinearLayout>
     </FrameLayout>
     <!-- The navigation drawer -->
     <ListView android:id="@+id/left_drawer"
-              android:layout_width="240dp"
+              android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_gravity="start"
               android:choiceMode="singleChoice"

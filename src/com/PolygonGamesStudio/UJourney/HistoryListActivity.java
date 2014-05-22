@@ -10,24 +10,27 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
+import com.PolygonGamesStudio.UJourney.Library.swipelistview.BaseSwipeListViewListener;
+import com.PolygonGamesStudio.UJourney.Library.swipelistview.SwipeListView;
 import com.PolygonGamesStudio.UJourney.Library.swipelistview.SwipeListViewListener;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.HistoryListCursorAdapter;
-import com.PolygonGamesStudio.UJourney.Library.swipelistview.SwipeListView;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
-    final String LOG_TAG = "myLogs";
-
-    HistoryListCursorAdapter scAdapter;
-    SwipeListView swipeListView;
-
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
     private static final int[] viewID =  new  int[]{R.id.histElId, R.id.histElTitle, R.id.histElVisitTime, R.id.histElPicture};
-
+    HistoryListCursorAdapter scAdapter;
+    SwipeListView swipeListView;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
@@ -43,6 +46,43 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         scAdapter = new HistoryListCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
         swipeListView = (SwipeListView)(findViewById(R.id.history_lv));
         swipeListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        swipeListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position,
+                                                  long id, boolean checked) {
+                mode.setTitle("Selected (" + swipeListView.getCountSelected() + ")");
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.btnDecline:
+                        swipeListView.dismissSelected();
+                        mode.finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+//                MenuInflater inflater = mode.getMenuInflater();
+//                inflater.inflate(R.menu.menu_choice_items, menu);
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                swipeListView.unselectedChoiceStates();
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+        });
 
         swipeListView.setSwipeListViewListener(new SwipeListViewListener() {
             @Override
@@ -119,6 +159,54 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
             @Override
             public void onLastListItem() {
 
+            }
+
+        });
+        swipeListView.setSwipeListViewListener(new BaseSwipeListViewListener() {
+            @Override
+            public void onOpened(int position, boolean toRight) {
+            }
+
+            @Override
+            public void onClosed(int position, boolean fromRight) {
+            }
+
+            @Override
+            public void onListChanged() {
+            }
+
+            @Override
+            public void onMove(int position, float x) {
+            }
+
+            @Override
+            public void onStartOpen(int position, int action, boolean right) {
+                Log.d("swipe", String.format("onStartOpen %d - action %d", position, action));
+            }
+
+            @Override
+            public void onStartClose(int position, boolean right) {
+                Log.d("swipe", String.format("onStartClose %d", position));
+            }
+
+            @Override
+            public void onClickFrontView(int position) {
+                Log.d("swipe", String.format("onClickFrontView %d", position));
+            }
+
+            @Override
+            public void onClickBackView(int position) {
+                Log.d("swipe", String.format("onClickBackView %d", position));
+            }
+
+            @Override
+            public void onDismiss(int[] reverseSortedPositions) {
+                for (int position : reverseSortedPositions) {
+//                    data.remove(position);
+                    Toast.makeText(HistoryListActivity.this, "dismiss element with pos: " + position, Toast.LENGTH_SHORT).show();
+                    // FIXME context
+                }
+                scAdapter.notifyDataSetChanged();
             }
 
         });

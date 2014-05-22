@@ -23,15 +23,13 @@
 
     <style name="ListBackContent">
         <item name="android:layout_width">fill_parent</item>
-        <!--<item name="android:layout_height">@dimen/height_list</item>-->
         <item name="android:layout_height">wrap_content</item>
-        <!--<item name="android:background">@drawable/background_item</item>-->
+        <item name="android:background">@drawable/background_item</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="ListFrontContent">
         <item name="android:layout_width">fill_parent</item>
-        <!--<item name="android:layout_height">@dimen/height_list</item>-->
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/background_list_front</item>
         <item name="android:padding">@dimen/padding_default</item>
