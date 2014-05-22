@@ -46,11 +46,12 @@ public class LogInActivity extends Activity {
             }
         });
 
-        Button signGoogleButton = (Button) findViewById(R.id.signGoogle);
+        final Button signGoogleButton = (Button) findViewById(R.id.signGoogle);
         signGoogleButton.setOnClickListener(new  View.OnClickListener() {
             public void onClick(View v) {
                 mNamesArray = getAccountNames();
-                GoogleLogin task = new GoogleLogin(LogInActivity.this, mNamesArray[0], SCOPE, REQUEST_CODE_RECOVER_FROM_AUTH_ERROR);
+                signGoogleButton.setEnabled(false);
+                GoogleLogin task = new GoogleLogin(LogInActivity.this, mNamesArray[0], SCOPE, REQUEST_CODE_RECOVER_FROM_AUTH_ERROR, getContentResolver());
                 task.execute();
             }
         });
@@ -64,5 +65,10 @@ public class LogInActivity extends Activity {
             names[i] = accounts[i].name;
         }
         return names;
+    }
+
+    public void startMainActivity() {
+        Intent intent = new Intent(LogInActivity.this, MainMenuActivity.class);
+        startActivity(intent);
     }
 }
