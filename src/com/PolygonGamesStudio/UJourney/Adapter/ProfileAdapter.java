@@ -19,6 +19,7 @@ public class ProfileAdapter extends BaseAdapter {
             "6 марта 2014",
             "15 июля 2013"
     };
+//    int[] icons = { R.drawable.menu_random, R.drawable.menu_category, R.drawable.menu_favorite};
 
     public ProfileAdapter(Context ctx) {
         this.ctx = ctx;

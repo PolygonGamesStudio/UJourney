@@ -7,14 +7,19 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.Adapter.ProfileAdapter;
+import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
+import com.squareup.picasso.Picasso;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
@@ -52,6 +57,7 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
         ProfileAdapter adapter = new ProfileAdapter(ProfileActivity.this);
         View header = getLayoutInflater().inflate(R.layout.profile_list_header, null);
         lvPlaces.addHeaderView(header);
+        lvPlaces.setAdapter(adapter);
 
         scAdapter = new ProfileHistorySimpleCursorAdapter(this, R.layout.profile_list_item, null, PROJECTION, viewID, 0);
         ListView lvData = (ListView) findViewById(R.id.PlacesListView);
