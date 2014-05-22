@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import com.PolygonGamesStudio.UJourney.AsyncTask.GoogleLogin;
+import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Service.CategoryService;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
 import com.google.android.gms.auth.GoogleAuthUtil;
@@ -34,6 +35,8 @@ public class LogInActivity extends Activity {
         Button anonymousButton = (Button) findViewById(R.id.anonymousButton);
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                getContentResolver().delete(CacheContentProvider.USER_CONTENT_URI, null, null);
 
                 Intent intent = new Intent(LogInActivity.this, MainMenuActivity.class);
                 startActivity(intent);

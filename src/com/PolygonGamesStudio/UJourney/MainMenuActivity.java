@@ -1,13 +1,18 @@
 package com.PolygonGamesStudio.UJourney;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.Adapter.MainMenuAdapter;
 import com.PolygonGamesStudio.UJourney.Adapter.ProfileAdapter;
+import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
 import com.PolygonGamesStudio.UJourney.Service.CategoryService;
@@ -66,6 +71,18 @@ public class MainMenuActivity extends Activity{
         ImageView v = (ImageView) header.findViewById(R.id.headerImageView);
         Picasso.with(MainMenuActivity.this).load(R.drawable.avatar_logout).transform(PicassoHelper.getTransform()).into(v);
         mDrawerList.addHeaderView(header);
+
+        Cursor c = getContentResolver().query(CacheContentProvider.USER_CONTENT_URI, null, null, null, null);
+        if (c.moveToFirst()) {
+
+            TextView text_user = (TextView) header.findViewById(R.id.headerTextView);
+            String name_user = c.getString(c.getColumnIndex("name"));
+            text_user.setText(name_user);
+
+            ImageView v_user = (ImageView) header.findViewById(R.id.headerImageView);
+            Picasso.with(MainMenuActivity.this).load(c.getString(c.getColumnIndex("picture"))).transform(PicassoHelper.getTransform()).into(v_user);
+
+        }
 
         mDrawerList.setAdapter(drawer_adapter);
 
