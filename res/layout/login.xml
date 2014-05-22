@@ -69,6 +69,12 @@
 
             android:textColor="@android:color/holo_red_light"
             android:layout_alignParentBottom="true"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Google"
+            android:id="@+id/signGoogle"
+            android:layout_below="@+id/QuestionTextView" android:layout_alignParentLeft="true"/>
 
     <!--FIXME: Убрать нахуй-->
 </RelativeLayout>
