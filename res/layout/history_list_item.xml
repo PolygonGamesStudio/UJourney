@@ -4,59 +4,43 @@
              android:layout_height="fill_parent">
     <LinearLayout
             android:id="@+id/back"
-            android:tag="back"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right">
+            style="@style/ListBackContent">
         <Button
-                android:id="@+id/decline"
+                android:id="@+id/btnDecline"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/ListButtonAction"
                 android:text="Decline"/>
         <Button
-                android:id="@+id/accept"
+                android:id="@+id/btnAccept"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/ListButtonAction"
                 android:text="Accept"/>
     </LinearLayout>
     <RelativeLayout
             android:id="@+id/front"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:padding="12dp">
+            style="@style/ListFrontContent">
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textPicture"
-
-                android:layout_marginRight="12dp"
-                android:src="@drawable/icon"/>
+                android:id="@+id/histElPicture"
+                android:src="@drawable/icon"
+                style="@style/HistoryListImage"/>
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/histElId"
                 android:text="ID"
-                android:id="@+id/textID"
-
-                android:textColor="@color/white" android:visibility="invisible"/>
+                style="@style/HistoryListId"/>
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/histElTitle"
                 android:text="Заголовок"
-                android:id="@+id/textTitle"
-
-                android:layout_toRightOf="@+id/textPicture"/>
+                android:layout_toRightOf="@+id/histElPicture"
+                style="@style/HistoryListTitle"/>
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/histElVisitTime"
                 android:text="Дата визита"
-                android:id="@+id/textVisit"
-
-                android:layout_below="@+id/textTitle"
-                android:layout_toRightOf="@+id/textPicture"/>
+                android:layout_below="@+id/histElTitle"
+                android:layout_toRightOf="@+id/histElPicture"
+                style="@style/HistoryListTitle"/>
     </RelativeLayout>
 </FrameLayout>
 

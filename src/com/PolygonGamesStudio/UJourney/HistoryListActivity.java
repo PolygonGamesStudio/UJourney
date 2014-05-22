@@ -10,27 +10,23 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
-import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
-import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
-import com.PolygonGamesStudio.UJourney.View.SwipeListView;
-
-import java.util.Arrays;
+import com.PolygonGamesStudio.UJourney.Library.swipelistview.SwipeListViewListener;
+import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.HistoryListCursorAdapter;
+import com.PolygonGamesStudio.UJourney.Library.swipelistview.SwipeListView;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
 
     final String LOG_TAG = "myLogs";
 
-    SimpleCursorAdapter scAdapter;
-    ListView lvData;
+    HistoryListCursorAdapter scAdapter;
     SwipeListView swipeListView;
 
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
-    private static final int[] viewID =  new  int[]{R.id.textID, R.id.textTitle, R.id.textVisit, R.id.textPicture};
+    private static final int[] viewID =  new  int[]{R.id.histElId, R.id.histElTitle, R.id.histElVisitTime, R.id.histElPicture};
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -44,15 +40,93 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        scAdapter = new JourneySimpleCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
-        lvData = (ListView) findViewById(R.id.lvData);
-//        swipeListView = (SwipeListView) findViewById(R.id.lvData);
-        lvData.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        lvData.setAdapter(scAdapter);
+        scAdapter = new HistoryListCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
+        swipeListView = (SwipeListView)(findViewById(R.id.history_lv));
+        swipeListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
+        swipeListView.setSwipeListViewListener(new SwipeListViewListener() {
+            @Override
+            public void onOpened(int position, boolean toRight) {
+            }
+
+            @Override
+            public void onClosed(int position, boolean fromRight) {
+            }
+
+            @Override
+            public void onListChanged() {
+            }
+
+            @Override
+            public void onMove(int position, float x) {
+            }
+
+            @Override
+            public void onStartOpen(int position, int action, boolean right) {
+                Log.d("swipe", String.format("onStartOpen %d - action %d", position, action));
+            }
+
+            @Override
+            public void onStartClose(int position, boolean right) {
+                Log.d("swipe", String.format("onStartClose %d", position));
+            }
+
+            @Override
+            public void onClickFrontView(int position) {
+                Log.d("swipe", String.format("onClickFrontView %d", position));
+
+                swipeListView.openAnimate(position); //when you touch front view it will open
+
+            }
+
+            @Override
+            public void onClickBackView(int position) {
+                Log.d("swipe", String.format("onClickBackView %d", position));
+
+                swipeListView.closeAnimate(position);//when you touch back view it will close
+            }
+
+            @Override
+            public void onDismiss(int[] reverseSortedPositions) {
+
+            }
+
+            @Override
+            public int onChangeSwipeMode(int position) {
+                return 0;
+            }
+
+            @Override
+            public void onChoiceChanged(int position, boolean selected) {
+
+            }
+
+            @Override
+            public void onChoiceStarted() {
+
+            }
+
+            @Override
+            public void onChoiceEnded() {
+
+            }
+
+            @Override
+            public void onFirstListItem() {
+
+            }
+
+            @Override
+            public void onLastListItem() {
+
+            }
+
+        });
+        swipeListView.setAdapter(scAdapter);
 
         initDrawer();
 
-        registerForContextMenu(lvData);
+        registerForContextMenu(swipeListView);
         getLoaderManager().initLoader(0, null, this);
 
     }

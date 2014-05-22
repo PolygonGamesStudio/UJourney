@@ -6,7 +6,6 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -18,7 +17,6 @@ import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Helper.PicassoHelper;
 import com.PolygonGamesStudio.UJourney.NavigationDrawer.DrawerItemClickListener;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
-import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.JourneySimpleCursorAdapter;
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.ProfileHistorySimpleCursorAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +29,7 @@ public class ProfileActivity extends Activity implements LoaderManager.LoaderCal
 
     SimpleCursorAdapter scAdapter;
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
-    private static final int[] viewID =  new  int[]{R.id.textID, R.id.headerTextView, R.id.descriptionTextView, R.id.headerImageView};
+    private static final int[] viewID =  new  int[]{R.id.histElId, R.id.headerTextView, R.id.descriptionTextView, R.id.headerImageView};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
