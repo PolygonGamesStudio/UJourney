@@ -16,6 +16,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
+import com.PolygonGamesStudio.UJourney.Service.RouteService;
 import com.squareup.picasso.Picasso;
 
 public class MainMenuActivity extends Activity{
@@ -43,6 +44,11 @@ public class MainMenuActivity extends Activity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:  // 0 - Случайно
+                        Intent route_service = new Intent(MainMenuActivity.this, RouteService.class);
+                        MainMenuActivity.this.startService(route_service);
+
+                        Intent route_intent = new Intent(MainMenuActivity.this, RouteActivity.class);
+                        MainMenuActivity.this.startActivity(route_intent);
                         break;
                     case 1:  // 1 - Категории
                         Intent service = new Intent(MainMenuActivity.this, CategoryService.class);

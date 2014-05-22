@@ -13,18 +13,18 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/place_relative_layout"
-                >
+                        android:id="@+id/place_relative_layout">
 
             <ImageView
                     android:id="@+id/place_background"
-                    android:layout_width="380dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/starbucks_background" />
+                    android:layout_width="match_parent"
+                    android:layout_height="205dp"
+                    android:src="@drawable/starbucks_background"
+                    android:layout_alignParentTop="true"/>
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
                     android:id="@+id/place_logo"
 
                     android:src="@drawable/starbucks_logo"
@@ -37,7 +37,7 @@
                     android:textColor="@color/white"
                     android:textSize="24dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="10dp"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                     android:layout_below="@id/place_background" />
 
             <ListView android:layout_width="match_parent"
-                      android:layout_height="match_parent"
+                      android:layout_height="wrap_content"
                       android:id="@+id/place_history_ListView"
 
                       android:layout_marginTop="24dp"

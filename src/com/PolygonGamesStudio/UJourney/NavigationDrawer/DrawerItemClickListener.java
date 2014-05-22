@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.PolygonGamesStudio.UJourney.HistoryListActivity;
-import com.PolygonGamesStudio.UJourney.LogInActivity;
-import com.PolygonGamesStudio.UJourney.PlaceActivity;
-import com.PolygonGamesStudio.UJourney.ProfileActivity;
+import com.PolygonGamesStudio.UJourney.*;
 import com.PolygonGamesStudio.UJourney.Service.HistoryService;
+import com.PolygonGamesStudio.UJourney.Service.RouteService;
 
 
 public class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -46,6 +44,14 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
             Intent place_intent = new Intent(parentActivity, PlaceActivity.class);
             parentActivity.startActivity(place_intent);
+        }
+
+        if (position == 3){  // 3 - Настройки
+            Intent route_service = new Intent(parentActivity, RouteService.class);
+            parentActivity.startService(route_service);
+
+            Intent route_intent = new Intent(parentActivity, RouteActivity.class);
+            parentActivity.startActivity(route_intent);
         }
 
         if (position == 4){  //  4 - выход

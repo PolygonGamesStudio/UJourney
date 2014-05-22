@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/headerTextView"
+            android:text="МАРШРУТ"
+            android:textStyle="bold"
+            android:textSize="14dp"
+
+            android:layout_marginLeft="14dp"
+            android:textColor="@android:color/black"
+            android:layout_alignParentTop="true"/>
+    <View
+            android:id="@+id/header_divider"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@id/headerTextView"/>
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_divider"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/from"
+                android:text="От"
+                android:layout_marginRight="5dp"/>
+        <TextView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Спартаковская площадь, д 1/2 sddkjfnsd"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_toRightOf="@id/from"
+                />
+    </RelativeLayout>
+
+</RelativeLayout>
