@@ -13,8 +13,8 @@ import android.net.Uri;
 
 public class CacheContentProvider extends ContentProvider {
 
-    static final String DB_NAME = "mydb";
-    static final int DB_VERSION = 1;
+    public static final String DB_NAME = "mydb";
+    public static final int DB_VERSION = 1;
 
     static final String HISTORY_TABLE = "history";
     static final String CATEGORY_TABLE = "category";
@@ -34,9 +34,11 @@ public class CacheContentProvider extends ContentProvider {
 
 
     static final String DB_CREATE_HISTORY = "create table " + HISTORY_TABLE + " ("
-            + HISTORY_ID_ANDROID + " integer primary key autoincrement, "
-            + HISTORY_ID + " integer unique, " + HISTORY_TITLE + " text, " + HISTORY_PICTURE + " text, " + HISTORY_VISIT
-            + " text" + ");";
+            + HISTORY_ID_ANDROID + " integer primary key autoincrement, " +
+            HISTORY_ID + " integer unique, " +
+            HISTORY_TITLE + " text, " +
+            HISTORY_PICTURE + " text, " +
+            HISTORY_VISIT + " text);";
 
     static final String DB_CREATE_CATEGORY = "create table " + CATEGORY_TABLE + " ("
             + HISTORY_ID_ANDROID + " integer primary key autoincrement, "
@@ -96,7 +98,7 @@ public class CacheContentProvider extends ContentProvider {
                 cursorCategory.setNotificationUri(getContext().getContentResolver(), CATEGORY_CONTENT_URI);
                 return cursorCategory;
             case URI_USER:
-                Cursor cursorUser = db.query(CATEGORY_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+                Cursor cursorUser = db.query(USER_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
                 cursorUser.setNotificationUri(getContext().getContentResolver(), USER_CONTENT_URI);
                 return cursorUser;
             default:
@@ -145,7 +147,20 @@ public class CacheContentProvider extends ContentProvider {
     }
 
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+        switch (uriMatcher.match(uri)) {
+            case URI_USER:
+                try {
+                    db = dbHelper.getWritableDatabase();
+                    long rowUserID = db.delete(USER_TABLE, selection, selectionArgs);
+                    Uri resultUserUri = ContentUris.withAppendedId(USER_CONTENT_URI, rowUserID);
+                    getContext().getContentResolver().notifyChange(resultUserUri, null);
+                    return 1;
+                } catch (SQLiteConstraintException e) {
+                    return 1;
+                }
+            default:
+                throw new IllegalArgumentException("Wrong URI: " + uri);
+        }
     }
 
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
