@@ -3,6 +3,7 @@ package com.PolygonGamesStudio.UJourney;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -14,10 +15,7 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 import com.PolygonGamesStudio.UJourney.Adapter.DrawerAdapter;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Library.swipelistview.BaseSwipeListViewListener;
@@ -26,6 +24,8 @@ import com.PolygonGamesStudio.UJourney.Library.swipelistview.SwipeListViewListen
 import com.PolygonGamesStudio.UJourney.SimpleCursorAdapter.HistoryListCursorAdapter;
 
 public class HistoryListActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>  {
+
+    SimpleCursorAdapter scAdapter;
 
     private static final String[] PROJECTION =  new  String[]{"_id", "title", "visit", "picture"};
     private static final int[] viewID =  new  int[]{R.id.histElId, R.id.histElTitle, R.id.histElVisitTime, R.id.histElPicture};
@@ -39,9 +39,10 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_list);
 
-        // TODO: make back action in ActionBar
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         scAdapter = new HistoryListCursorAdapter(this, R.layout.history_list_item, null, PROJECTION, viewID, 0);
         swipeListView = (SwipeListView)(findViewById(R.id.history_lv));
@@ -269,4 +270,9 @@ public class HistoryListActivity extends Activity implements LoaderManager.Loade
         scAdapter.swapCursor(null);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        this.finish();
+        return super.onOptionsItemSelected(item);
+    }
 }
