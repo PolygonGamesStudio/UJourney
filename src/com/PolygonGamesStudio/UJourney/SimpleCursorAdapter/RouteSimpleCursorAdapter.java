@@ -72,11 +72,12 @@ public class RouteSimpleCursorAdapter extends SimpleCursorAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouteActivity.currentPosition ++;
-                View currentView = ((ListView)v.getParent()).getChildAt(RouteActivity.currentPosition);
-                currentView.setVisibility(View.VISIBLE);
-                currentView.setEnabled(true);
-                v.setBackgroundColor(Color.rgb(8,196,99));
+                try {
+                    RouteActivity.currentPosition ++;
+                    View currentView = ((ListView)v.getParent()).getChildAt(RouteActivity.currentPosition);
+                    currentView.setVisibility(View.VISIBLE);
+                    currentView.setEnabled(true);
+                    v.setBackgroundColor(Color.rgb(8,196,99));
 //                currentView.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -86,7 +87,11 @@ public class RouteSimpleCursorAdapter extends SimpleCursorAdapter {
 //                        currentView.setOnClickListener();
 //                    }
 //                });
-                //setEnabled
+                    //setEnabled
+                } catch (NullPointerException e){
+
+                }
+
             }
         });
         if (position != 0){
