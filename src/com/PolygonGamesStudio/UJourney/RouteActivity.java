@@ -8,6 +8,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ public class RouteActivity extends Activity implements LoaderManager.LoaderCallb
     private static final String[] PROJECTION =  new  String[]{"_id", "text"};
     private static final int[] viewID =  new  int[]{R.id.nodeID, R.id.node_text};
 
-    public static int currentPosition = 1;
+    public static int currentPosition = 0;
     SimpleCursorAdapter scAdapter1;
     Cursor cursor;
 
@@ -31,6 +32,30 @@ public class RouteActivity extends Activity implements LoaderManager.LoaderCallb
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.route);
+
+        EditText moneyInput = (EditText)findViewById(R.id.route_money_input);
+        moneyInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && ((EditText)v).getText().toString().equals("") ){
+                    ((EditText) v).setText(R.string.money_count);
+                } else if (hasFocus && ((EditText)v).getText().toString().equals(getString(R.string.money_count)) ){
+                    ((EditText) v).setText("");
+                }
+            }
+        });
+
+        EditText timeInput = (EditText)findViewById(R.id.route_time_input);
+        timeInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && ((EditText)v).getText().toString().equals("") ){
+                    ((EditText) v).setText(R.string.time_count);
+                } else if (hasFocus && ((EditText)v).getText().toString().equals(getString(R.string.time_count)) ){
+                    ((EditText) v).setText("");
+                }
+            }
+        });
 
         ListView lvNodes = (ListView) findViewById(R.id.route_nodes_ListView);
         View header = getLayoutInflater().inflate(R.layout.route_list_header, null);

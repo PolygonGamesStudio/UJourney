@@ -13,27 +13,32 @@
             android:id="@+id/route_header">
         <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:inputType="time"
                 android:ems="14"
                 android:id="@+id/route_time_input"
 
-                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/white"
+                android:text="@string/time_count"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="38dp"
-                android:background="@color/white"/>
+                android:background="@drawable/text_lines"/>
         <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:inputType="number"
                 android:ems="20"
                 android:id="@+id/route_money_input"
 
-                android:textColor="@color/black"
+
+                android:textCursorDrawable="@null"
+                android:text="@string/money_count"
+                android:textColor="@color/white"
                 android:layout_below="@id/route_time_input"
                 android:layout_marginTop="5dp"
-                android:background="@color/white"/>
+                android:background="@drawable/text_lines"/>
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

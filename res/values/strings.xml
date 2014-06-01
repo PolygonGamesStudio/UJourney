@@ -17,5 +17,7 @@
 
     <!--route activity-->
     <string name="start_journey">Начать прогулку</string>
+    <string name="time_count">Сколько планируете провести времени?</string>
+    <string name="money_count">Сколько планируете потратить?</string>
 
 </resources>

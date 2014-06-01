@@ -49,56 +49,39 @@ public class RouteSimpleCursorAdapter extends SimpleCursorAdapter {
 
                 viewHolder = new RouteHolder(convertView);
                 viewHolder.text = (TextView) convertView.findViewById(R.id.node_text);
-//                viewHolder.image = (ImageView) convertView.findViewById(R.id.contact_pic);
-//                viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
-
                 convertView.setTag(viewHolder);
-            }
-            else {
+            } else {
                 viewHolder = (RouteHolder) convertView.getTag();
             }
 
             String name = mCursor.getString(mNameIndex);
             String text = mCursor.getString(mtextIndex);
-            //String fb_id = mCursor.getString(mIdIndex);
-            //Drawable drawable = LoadImageFromWebOperations("http://graph.facebook.com/"+fb_id+"/picture");
-            //boolean isChecked = ((GlobalVars) mContext.getApplicationContext()).isFriendSelected(fb_id);
+
             viewHolder.text.setText(text);
             viewHolder.id.setText(name);
-//            viewHolder.image.setImageDrawable(drawable);
-//            viewHolder.checkBox.setTag(fb_id);
-//            viewHolder.checkBox.setChecked(isChecked);
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    RouteActivity.currentPosition ++;
-                    View currentView = ((ListView)v.getParent()).getChildAt(RouteActivity.currentPosition);
-                    currentView.setVisibility(View.VISIBLE);
-                    currentView.setEnabled(true);
-                    v.setBackgroundColor(Color.rgb(8,196,99));
-//                currentView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        RouteActivity.currentPosition ++;
-//                        View currentView = ((ListView)v.getParent()).getChildAt(RouteActivity.currentPosition);
-//                        currentView.setVisibility(View.VISIBLE);
-//                        currentView.setOnClickListener();
-//                    }
-//                });
-                    //setEnabled
-                } catch (NullPointerException e){
+                v.setBackgroundColor(Color.rgb(8,196,99));
+                v.setEnabled(false);
 
+                //тут короче ёбаная магия. Первый ребенок - это хедер листвьюшки.
+                RouteActivity.currentPosition ++;
+                if( RouteActivity.currentPosition != RouteSimpleCursorAdapter.this.mCursor.getCount() ){
+                    View nextNodeView = ((ListView)v.getParent()).getChildAt(RouteActivity.currentPosition + 1);
+                    nextNodeView.setVisibility(View.VISIBLE);
+                    nextNodeView.setEnabled(true);
                 }
-
             }
+
         });
         if (position != 0){
             convertView.setVisibility(View.INVISIBLE);
             convertView.setEnabled(false);
         } else {
-
+            convertView.setVisibility(View.VISIBLE);
+            convertView.setEnabled(true);
         }
 
         return convertView;
@@ -121,11 +104,6 @@ public class RouteSimpleCursorAdapter extends SimpleCursorAdapter {
 //        }
 
 // PROJECTION = {"_id", "title", "visit", "picture"}
-
-
-
-
-
 //        holder.btnAccept.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
