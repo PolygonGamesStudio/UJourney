@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
+import android.widget.Toast;
 import com.PolygonGamesStudio.UJourney.ContentProvider.CacheContentProvider;
 import com.PolygonGamesStudio.UJourney.Handler.HttpConnectionHandler;
 import org.json.JSONArray;
@@ -19,6 +20,7 @@ public class CategoryService extends IntentService {
 
     public void onCreate() {
         super.onCreate();
+        Toast.makeText(this, "Выполняется обновление списка категорий", Toast.LENGTH_SHORT).show();
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -27,6 +29,7 @@ public class CategoryService extends IntentService {
 
     public void onDestroy() {
         super.onDestroy();
+        Toast.makeText(this, "Обновление выполнено", Toast.LENGTH_SHORT).show();
     }
 
     public IBinder onBind(Intent intent) {
